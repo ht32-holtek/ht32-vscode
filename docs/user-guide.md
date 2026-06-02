@@ -25,7 +25,10 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 1. VS Code → 擴充功能 → `...` → **Install from VSIX...**
 2. 選取 `ht32-proj-assistant-x.x.x.vsix`
 
-<img src="1.jpg" width="370" style="border:1px solid #ccc; border-radius:4px; padding:3px;"> <img src="2.jpg" width="370" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<table><tr>
+<td><img src="1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+<td><img src="2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+</tr></table>
 
 ---
 **方法二：從 Marketplace 安裝**

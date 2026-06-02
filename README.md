@@ -44,7 +44,10 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 1. VS Code → Extensions → `...` → **Install from VSIX...**
 2. Select `ht32-proj-assistant-x.x.x.vsix`
 
-<img src="docs/1.jpg" width="370" style="border:1px solid #ccc; border-radius:4px; padding:3px;"> <img src="docs/2.jpg" width="370" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<table><tr>
+<td><img src="docs/1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+<td><img src="docs/2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+</tr></table>
 
 ---
 
