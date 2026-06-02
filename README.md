@@ -205,7 +205,7 @@ A **Post-Build** command can be configured in Settings to run automatically afte
 
 ## Clean
 
-- Click **Clean** (🧹) in the HT32 toolbar
+- Click **Clean** in the HT32 toolbar
 - Deletes all compiled output under `.vscode/build-gen/build/`
 
 ---

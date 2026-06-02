@@ -53,12 +53,12 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 
 | 按鈕 | 功能 |
 |------|------|
-| 🔨 Build | 編譯 |
-| 🐞 Debug | 除錯 |
-| 🧹 Clean | 清除 |
-| ☁️ Download | 燒錄 |
-| ⚙️ Settings | 專案設定 |
-| `{}` Generate Config | 重新產生 tasks.json / launch.json |
+| Build | 編譯 |
+| Debug | 除錯 |
+| Clean | 清除 |
+| Download | 燒錄 |
+| Settings | 專案設定 |
+| Generate Config | 重新產生 tasks.json / launch.json |
 
 ---
 
