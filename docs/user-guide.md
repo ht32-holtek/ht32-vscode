@@ -82,7 +82,7 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 
 > 需要先準備好 HT32 FWLib（從 Holtek 官網下載）
 
-1. HT32 面板 → **Create Project**（`+` 圖示）
+1. HT32 面板 → **Create Project**
 2. 依精靈步驟選擇：
 
 | 步驟 | 內容 |
