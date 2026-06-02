@@ -25,7 +25,7 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 1. VS Code → 擴充功能 → `...` → **Install from VSIX...**
 2. 選取 `ht32-proj-assistant-x.x.x.vsix`
 
-![Install from VSIX step 1](1.jpg) ![Install from VSIX step 2](2.jpg)
+<img src="1.jpg" width="370" style="border:1px solid #ccc; border-radius:4px; padding:3px;"> <img src="2.jpg" width="370" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 **方法二：從 Marketplace 安裝**
@@ -33,7 +33,7 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 1. 擴充功能搜尋欄輸入 `Holtek Project Assistant`
 2. 點 **Install**
 
-![Marketplace 安裝](3.jpg)
+<img src="3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -43,7 +43,7 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 
 專案未開啟時顯示 **Create / Open / Convert** 按鈕；若有歷史記錄，下方會列出 **Recent Projects**，點擊即可直接開啟。
 
-![專案未開啟畫面](4.jpg)
+<img src="4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 
 ---
@@ -66,7 +66,7 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 
 HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 Keil uVision 的群組概念相同。
 
-![專案檔案樹畫面](5.jpg)
+<img src="5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 右鍵選單支援以下操作：
 
@@ -92,7 +92,7 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 | ③ | 選擇輸出類型：**Application** 或 **Library** |
 | ④ | 輸入**專案名稱**和儲存位置 |
 
-![Create Project畫面](6.jpg)
+<img src="6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -146,6 +146,8 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 
 如 Keil 預編譯 `.lib` 無法用於 GCC 工具鏈）會顯示在 VS Code **Problems** 面板中。
 
+<img src="18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
 
 ```
 .vscode/
@@ -162,7 +164,7 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 ```
 
 
-![Convert Project畫面](7.jpg)
+<img src="7.png" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -184,16 +186,11 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 - HT32 工具列點 **Build**
 - 或按 `Ctrl+Shift+B`（直接執行預設建置任務 **Build (make)**）
 
-
-```
-Memory region    Used Size   Region Size  %age Used
-         FLASH:    12348 B       512 KB      2.35%
-           RAM:     2048 B        32 KB      6.25%
-```
+<img src="8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 也可在「專案設定」中設定 **Post-Build** 命令，Build 成功後自動執行（例如 CRC 計算）。
 
-![Post-Build畫面](9.jpg)
+<img src="9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -212,9 +209,9 @@ Memory region    Used Size   Region Size  %age Used
 2. HT32 工具列點 **Download**（☁️）
 3. 韌體自動燒錄，Terminal 顯示進度
 
-![Download畫面](10.jpg)
+<img src="10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-### 燒錄設定（在專案設定中調整）
+### 燒錄設定
 
 | 設定 | 選項 |
 |------|------|
@@ -239,7 +236,7 @@ Memory region    Used Size   Region Size  %age Used
 
 1. 確認目標板已上電並執行
 2. 按 **F5** 或開啟 **Run and Debug**（Ctrl+Shift+D）
-3. 從下拉選單選擇 **HT32 OpenOCD Attach**，再按 ▶ 開始
+3. 從下拉選單選擇 **HT32 OpenOCD Attach**
 
 > Attach 不會編譯也不會燒錄，直接透過 OpenOCD 連線並暫停 CPU。
 
@@ -248,7 +245,7 @@ Memory region    Used Size   Region Size  %age Used
 | HT32 OpenOCD Debug | 編譯→燒錄→啟動除錯（完整流程） |
 | HT32 OpenOCD Attach | 不燒錄，直接附接到已執行中的目標 |
 
-![Debug畫面](11.jpg)
+<img src="11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -256,7 +253,6 @@ Memory region    Used Size   Region Size  %age Used
 
 HT32 工具列點 **Settings**（⚙️）開啟設定面板。
 
-![Setting-1畫面](15.jpg)
 
 | 設定項目 | 說明 |
 |----------|------|
@@ -271,7 +267,7 @@ HT32 工具列點 **Settings**（⚙️）開啟設定面板。
 | printf float | 啟用浮點 printf（`-u _printf_float`） |
 | scanf float | 啟用浮點 scanf（`-u _scanf_float`） |
 
-![Setting-2畫面](12.jpg)
+<img src="15.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -284,6 +280,8 @@ HT32 工具列點 **Settings**（⚙️）開啟設定面板。
 | Extra Libs | 直接加入連結的 `.a` / `.o` 路徑 |
 | Extra Lib Names | 函式庫名稱（`-lName`） |
 | Extra Lib Paths | 函式庫搜尋路徑（`-L"dir"`） |
+
+<img src="19.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ### 其他
 
@@ -306,6 +304,9 @@ HT32 工具列點 **Settings**（⚙️）開啟設定面板。
 | Erase Mode | `erase_sector`（預設）/ `erase_chip` / `none` |
 | Flash Loaders | 附加外部 Flash Loader（例如 SPI Flash） |
 | OpenOCD Debug Level | 0=關閉 / 1~3 逐漸詳細 |
+
+<img src="16.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="17.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -365,7 +366,8 @@ HT32 工具列點 **Settings**（⚙️）開啟設定面板。
 - `.clangd`（workspace root）— include 路徑、編譯旗標
 - `.vscode/compile_commands.json` — 合併版，供 clangd 使用
 
-![clangd畫面](13.jpg)
+<img src="13.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="14.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 建議安裝 **clangd** 擴充功能（`llvm-vs-code-extensions.vscode-clangd`）並停用內建 C/C++ IntelliSense 以避免衝突。
 
