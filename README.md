@@ -310,7 +310,6 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 |---------|-------------|
 | Post-Build | Command to run after a successful build (working dir: `${workspaceFolder}`) |
 | GCC Path | `arm-none-eabi-gcc` path (blank = auto-detect) — machine-wide |
-| Make Path | `make` path (blank = use bundled Make) — machine-wide |
 | OpenOCD Path | OpenOCD path (blank = use bundled OpenOCD) — machine-wide |
 
 Toolchain paths are stored in VS Code User Settings and shared across all projects.

@@ -298,10 +298,9 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 |----------|------|
 | Post-Build | Build 後執行的命令 |
 | GCC Path | `arm-none-eabi-gcc` 路徑（空白 = 自動偵測或 winget 安裝） |
-| Make Path | `make` 路徑（空白 = 使用 bundled Make） |
 | OpenOCD Path | OpenOCD 路徑（空白 = 使用 bundled OpenOCD） |
 
-> 工具鏈路徑（GCC / Make / OpenOCD）儲存於 VS Code 機器設定，**所有專案共用**，僅顯示於第一個專案的 Build 分頁。  
+> 工具鏈路徑（GCC / OpenOCD）儲存於 VS Code 機器設定，**所有專案共用**，僅顯示於第一個專案的 Build 分頁。  
 > 專案設定儲存於 `.vscode/build-gen/project.settings.json`，3 秒後自動儲存。
 
 ---
