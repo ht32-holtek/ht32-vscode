@@ -1,4 +1,4 @@
-[English](https://ht32-holtek.github.io/ht32-vscode/) | [中文使用手冊](#holtek-ht32-vs-code-extension)
+[English](http://mcutest.holtek.com.tw/ht32-vscode/) | [中文使用手冊](#holtek-ht32-vs-code-extension)
 
 # Holtek HT32 VS Code Extension
 Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
@@ -28,8 +28,8 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 2. 選取 `ht32-vscode-x.x.x.vsix`
 
 <table><tr>
-<td><img src="https://ht32-holtek.github.io/ht32-vscode/media/1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
-<td><img src="https://ht32-holtek.github.io/ht32-vscode/media/2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+<td><img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+<td><img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
 </tr></table>
 
 ---
@@ -38,7 +38,7 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 1. 擴充功能搜尋欄輸入 `Holtek HT32 VS Code Extension`
 2. 點 **Install**
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -48,7 +48,7 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 
 專案未開啟時顯示 **Create / Open / Convert** 按鈕；若有歷史記錄，下方會列出 **Recent Projects**，點擊即可直接開啟。
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 
 ---
@@ -71,7 +71,7 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 
 HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 Keil uVision 的群組概念相同。
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 右鍵選單支援以下操作：
 
@@ -97,7 +97,7 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 | ③ | 選擇輸出類型：**Application** 或 **Library** |
 | ④ | 輸入**專案名稱**和儲存位置 |
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -151,7 +151,7 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 
 如 Keil 預編譯 `.lib` 無法用於 GCC 工具鏈）會顯示在 VS Code **Problems** 面板中。
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 
 ```
@@ -169,7 +169,7 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 ```
 
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/7.png" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/7.png" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -191,11 +191,11 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 - HT32 工具列點 **Build**
 - 或按 `Ctrl+Shift+B`（直接執行預設建置任務 **Build (make)**）
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 也可在「專案設定」中設定 **Post-Build** 命令，Build 成功後自動執行（例如 CRC 計算）。
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -214,7 +214,7 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 2. HT32 工具列點 **Download**
 3. 韌體自動燒錄，Terminal 顯示進度
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ### 燒錄設定
 
@@ -250,7 +250,7 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 | HT32 OpenOCD Debug | 編譯→燒錄→啟動除錯（完整流程） |
 | HT32 OpenOCD Attach | 不燒錄，直接附接到已執行中的目標 |
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -276,7 +276,7 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 | Extra CFLAGS | 附加編譯旗標，例如 `-DDEBUG` |
 | Extra LDFLAGS | 附加連結旗標 |
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/15.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/15.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ### Debugger 分頁
 
@@ -291,8 +291,8 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 | Erase Mode | `erase_sector`（預設）/ `erase_chip` / `none` |
 | Flash Loaders | 附加外部 Flash Loader（例如 SPI Flash） |
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/16.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/17.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/16.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/17.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ### Build 分頁
 
@@ -349,8 +349,8 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 - `.clangd`（workspace root）— include 路徑、編譯旗標
 - `.vscode/compile_commands.json` — 合併版，供 clangd 使用
 
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/13.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
-<img src="https://ht32-holtek.github.io/ht32-vscode/media/14.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/13.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/14.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 建議安裝 **clangd** 擴充功能（`llvm-vs-code-extensions.vscode-clangd`）並停用內建 C/C++ IntelliSense 以避免衝突。
 
