@@ -1,6 +1,6 @@
-[中文使用手冊](README_TRAD.md) | [English](#ht32-project-assistant-for-vs-code)
+[中文使用手冊](https://ht32-holtek.github.io/ht32-vscode/README_TRAD) | [English](#holtek-ht32-vs-code-extension)
 
-# HT32 Project Assistant for VS Code
+# Holtek HT32 VS Code Extension
 
 A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3/M4). Converts Keil uVision and HT32-IDE projects to a Makefile workflow, or creates new projects from scratch — with one-click build, flash, and debug via the bundled OpenOCD and e-Link32 probe.
 
@@ -42,21 +42,21 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 **Option A — From VSIX**
 
 1. VS Code → Extensions → `...` → **Install from VSIX...**
-2. Select `ht32-proj-assistant-x.x.x.vsix`
+2. Select `ht32-vscode-x.x.x.vsix`
 
 <table><tr>
-<td><img src="media/1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
-<td><img src="media/2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+<td><img src="https://ht32-holtek.github.io/ht32-vscode/media/1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+<td><img src="https://ht32-holtek.github.io/ht32-vscode/media/2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
 </tr></table>
 
 ---
 
 **Option B — From Marketplace**
 
-1. Search `Holtek Project Assistant` in the Extensions view
+1. Search `Holtek HT32 VS Code Extension` in the Extensions view
 2. Click **Install**
 
-<img src="media/3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -66,7 +66,7 @@ After installation, the **HT32 icon** appears in the Activity Bar. Click it to o
 
 **When no project is open:** shows **Create / Open / Convert** buttons, plus a **Recent Projects** list below for quick access.
 
-<img src="media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -85,7 +85,7 @@ After installation, the **HT32 icon** appears in the Activity Bar. Click it to o
 
 **Project File Tree** (bottom of the HT32 panel) shows source groups — the same group concept as Keil uVision.
 
-<img src="media/5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 Right-click menu:
 
@@ -113,7 +113,7 @@ Right-click menu:
 | ③ | Choose output type: **Application** or **Library** |
 | ④ | Enter **project name** and save location |
 
-<img src="media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -178,9 +178,9 @@ For `.uvmpw`, **all sub-projects are converted at once**, each into its own `.vs
 
 Conversion warnings (e.g. prebuilt `.lib` files that cannot be used with GCC) appear in the VS Code **Problems** panel.
 
-<img src="media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-<img src="media/7.png" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/7.png" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -198,11 +198,11 @@ If the folder contains multiple sub-projects, all are converted at once, each in
 - Click **Build** in the HT32 toolbar
 - Or press **Ctrl+Shift+B** to access VS Code tasks (Build, Build All, Clean, Download)
 
-<img src="media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 A **Post-Build** command can be configured in Settings to run automatically after a successful build (e.g. CRC calculation).
 
-<img src="media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -221,7 +221,7 @@ A **Post-Build** command can be configured in Settings to run automatically afte
 2. Click **Download** in the HT32 toolbar
 3. Firmware is flashed automatically; progress is shown in the Terminal
 
-<img src="media/10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ### Flash Settings (configured in HT32 Settings)
 
@@ -256,7 +256,7 @@ Use this when the target board is already running and you don't need to reflash.
 | HT32 OpenOCD Debug | Compile → Flash → Start debug session |
 | HT32 OpenOCD Attach | Connect to running target without flashing |
 
-<img src="media/11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -282,7 +282,7 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 | Extra CFLAGS | Additional compiler flags, e.g. `-DDEBUG` |
 | Extra LDFLAGS | Additional linker flags |
 
-<img src="media/15.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/15.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -299,8 +299,8 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 | Erase Mode | `erase_sector` (default) / `erase_chip` / `none` |
 | Flash Loaders | Add external flash loaders (e.g. SPI Flash) |
 
-<img src="media/16.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
-<img src="media/17.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/16.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/17.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -356,8 +356,8 @@ After conversion or project creation, the extension auto-generates:
 - `.clangd` (workspace root) — include paths, compiler flags
 - `.vscode/compile_commands.json` — merged for clangd
 
-<img src="media/13.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
-<img src="media/14.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/13.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://ht32-holtek.github.io/ht32-vscode/media/14.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 Recommended: install the **clangd** extension (`llvm-vs-code-extensions.vscode-clangd`) and disable the built-in C/C++ IntelliSense to avoid conflicts.
 
