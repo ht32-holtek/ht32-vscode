@@ -17,7 +17,7 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 
 > **GCC 工具鏈**：擴充功能啟動時自動偵測；找不到時透過 winget 自動安裝<br>
 > **OpenOCD**：已內建，無需另外安裝<br>
-> **相依擴充功能**：安裝時自動一併安裝 **Cortex-Debug**（除錯介面）與 **Holtek Configuration Wizard**（設定精靈）
+> **相依擴充功能**：安裝時自動一併安裝 **Cortex-Debug**（除錯介面）與 **Holtek HT32 Configuration Wizard**（設定精靈）
 
 ---
 ## 安裝擴充功能
@@ -309,7 +309,7 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 
 ## Configuration Wizard
 
-**Holtek Configuration Wizard** 為相依擴充功能，安裝 Project Assistant 時會自動一併安裝，提供 HT32 韌體設定檔的視覺化圖形編輯介面，相容 Keil MDK Configuration Wizard 語法。
+**Holtek HT32 Configuration Wizard** 為相依擴充功能，安裝 Project Assistant 時會自動一併安裝，提供 HT32 韌體設定檔的視覺化圖形編輯介面，相容 Keil MDK Configuration Wizard 語法。
 
 ### 支援的設定檔
 
@@ -326,10 +326,10 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 開啟支援的檔案（`.h`、`.c`、`.s`）後，點擊編輯器右上角的 **Preview** 按鈕即可切換為 Wizard 視圖；點擊 **Go to File** 切換回文字編輯。
 
 **方法二 — 右鍵選單：**  
-在 Explorer 中對 `.h`、`.c`、`.s` 檔案按右鍵 → **Open in Holtek Configuration Wizard**
+在 Explorer 中對 `.h`、`.c`、`.s` 檔案按右鍵 → **Open in Holtek HT32 Configuration Wizard**
 
 **方法三 — 命令面板：**  
-`Ctrl+Shift+P` → **HT32: Open in Holtek Configuration Wizard**
+`Ctrl+Shift+P` → **HT32: Open in Holtek HT32 Configuration Wizard**
 
 ### 控制項類型
 

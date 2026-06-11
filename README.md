@@ -33,7 +33,7 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 
 > **GCC toolchain:** Auto-detected on startup; installed automatically via winget if not found, or set manually in settings.<br>
 > **OpenOCD:** Bundled — no separate installation needed.<br>
-> **Extension dependencies:** [Cortex-Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and [Holtek Configuration Wizard](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-wizard) are installed automatically.
+> **Extension dependencies:** [Cortex-Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and [Holtek HT32 Configuration Wizard](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode) are installed automatically.
 
 ---
 
@@ -318,7 +318,7 @@ Toolchain paths are stored in VS Code User Settings and shared across all projec
 
 ## Configuration Wizard
 
-The **Holtek Configuration Wizard** extension (installed automatically) provides a visual editor for HT32 firmware configuration files, compatible with Keil MDK Configuration Wizard syntax.
+The **Holtek HT32 Configuration Wizard** extension (installed automatically) provides a visual editor for HT32 firmware configuration files, compatible with Keil MDK Configuration Wizard syntax.
 
 **Supported files:**
 
@@ -332,8 +332,8 @@ The **Holtek Configuration Wizard** extension (installed automatically) provides
 **How to open:**
 
 - **Editor title button (recommended):** Open a supported `.h` / `.c` / `.s` file, then click the **Preview** button in the editor title bar. Click **Go to File** to switch back to text editing.
-- **Right-click menu:** Right-click the file in Explorer → **Open in Holtek Configuration Wizard**
-- **Command Palette:** `Ctrl+Shift+P` → **HT32: Open in Holtek Configuration Wizard**
+- **Right-click menu:** Right-click the file in Explorer → **Open in Holtek HT32 Configuration Wizard**
+- **Command Palette:** `Ctrl+Shift+P` → **HT32: Open in Holtek HT32 Configuration Wizard**
 
 **Control types:**
 
