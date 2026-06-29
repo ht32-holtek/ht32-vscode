@@ -1,4 +1,4 @@
-[中文使用手冊](http://mcutest.holtek.com.tw/ht32-vscode/README_TRAD) | [English](#holtek-ht32-vs-code-extension)
+[中文使用手冊](README_TRAD.md) | [English](#holtek-ht32-vs-code-extension)
 
 # Holtek HT32 VS Code Extension
 
@@ -12,7 +12,7 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 |---------|-------------|
 | **Create Project** | Wizard-driven project generator from HT32 FWLib (standard & 49x series) |
 | **Convert uVision** | Import Keil `.uvprojx` / `.uvmpw` projects — Makefile, linker script, clangd config auto-generated |
-| **Convert HT32-IDE** | Import Eclipse CDT `.project`/`.cproject` projects |
+| **Convert HT32-IDE** | Import one or more Eclipse CDT `.project`/`.cproject` project folders (multi-select supported) |
 | **Build / Clean** | One-click or toolbar buttons; compound post-build task support |
 | **Download (Flash)** | Flash firmware via bundled OpenOCD + e-Link32 Pro/Lite |
 | **Debug** | Cortex-Debug + bundled OpenOCD; Flash & Debug or Attach mode |
@@ -33,7 +33,7 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 
 > **GCC toolchain:** Auto-detected on startup; installed automatically via winget if not found, or set manually in settings.<br>
 > **OpenOCD:** Bundled — no separate installation needed.<br>
-> **Extension dependencies:** [Cortex-Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and [Holtek HT32 Configuration Wizard](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode) are installed automatically.
+> **Extension dependencies:** [Cortex-Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and [Holtek Configuration Wizard](https://marketplace.visualstudio.com/items?itemName=holtek-semi.ht32-config-wizard) are installed automatically.
 
 ---
 
@@ -42,11 +42,11 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 **Option A — From VSIX**
 
 1. VS Code → Extensions → `...` → **Install from VSIX...**
-2. Select `ht32-vscode-x.x.x.vsix`
+2. Select `ht32-proj-assistant-x.x.x.vsix`
 
 <table><tr>
-<td><img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
-<td><img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+<td><img src="media/1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
+<td><img src="media/2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
 </tr></table>
 
 ---
@@ -56,7 +56,7 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 1. Search `Holtek HT32 VS Code Extension` in the Extensions view
 2. Click **Install**
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -66,7 +66,7 @@ After installation, the **HT32 icon** appears in the Activity Bar. Click it to o
 
 **When no project is open:** shows **Create / Open / Convert** buttons, plus a **Recent Projects** list below for quick access.
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -85,7 +85,7 @@ After installation, the **HT32 icon** appears in the Activity Bar. Click it to o
 
 **Project File Tree** (bottom of the HT32 panel) shows source groups — the same group concept as Keil uVision.
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 Right-click menu:
 
@@ -94,6 +94,37 @@ Right-click menu:
 | Project root | Add group |
 | Group | Add file, Remove group |
 | File | Remove from group, Delete from disk |
+
+---
+
+## Project File (.ht32ws)
+
+Every HT32 project is associated with a **`.ht32ws` project file** (stored inside `HT32_VSCode/`). This file records which sub-project directories belong to the workspace and is created automatically after conversion or project creation.
+
+### Opening a project
+
+| Method | Description |
+|--------|-------------|
+| **Double-click `.ht32ws`** | Double-click a `.ht32ws` file in Explorer — opens the project directly |
+| **Open Project** (`HT32: Open Project`) | Browse for a `.ht32ws` file via command |
+| **Recent Projects** | Click any entry in the Recent Projects list (shown when no project is open) |
+
+When a project is opened via `.ht32ws`, the **TreeView root node** shows the project name (the `.ht32ws` filename without extension). Only the sub-projects listed in the `.ht32ws` file are shown in the TreeView, toolbar QuickPick, and Settings WebView.
+
+### Managing sub-projects
+
+A `.ht32ws` file can list multiple sub-project directories (e.g. `Project_IAP` and `Project_AP`). You can add or remove entries at any time without re-converting.
+
+| Action | How |
+|--------|-----|
+| **Add Project to Workspace** | Right-click the root node → **Add Project to Workspace** — select from available directories in the same folder |
+| **Remove Project from Workspace** | Right-click a project node → **Remove Project from Workspace** — removes it from the list (files on disk are not deleted) |
+
+### Renaming a project
+
+Right-click the root node in the Project Tree → **Rename Project File**. This renames the `.ht32ws` file on disk and updates the Recent Projects list automatically.
+
+> Rename is only available when a `.ht32ws` file is active (not in Open Folder mode).
 
 ---
 
@@ -113,35 +144,36 @@ Right-click menu:
 | ③ | Choose output type: **Application** or **Library** |
 | ④ | Enter **project name** and save location |
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
 ### Generated File Structure
 
 ```
-<workspace>/
-├── .clangd
-├── src/
+MyProject/                 ← user-named project folder
+├── src/                   ← user source files
 │   ├── main.c
 │   ├── ht32fxxxx_it.c
 │   ├── system_ht32fxxxx.c
 │   ├── ht32fxxxx_conf.h
 │   └── ht32_op.c
-└── .vscode/
-    ├── tasks.json
-    ├── launch.json
-    ├── compile_commands.json
-    └── build-gen/
+├── .clangd                ← auto-generated on project open (clangd config)
+└── HT32_VSCode/           ← VS Code workspace root
+    ├── .vscode/
+    │   ├── tasks.json
+    │   ├── launch.json
+    │   └── compile_commands.json
+    ├── GNU_ARM/           ← generated GCC support files
+    │   ├── startup_ht32fxxxx_gcc_xx.s
+    │   ├── linker.ld
+    │   ├── syscalls.c
+    │   └── ht32_stack_analysis.c
+    └── Project_xxxxx/     ← Makefile & build metadata (xxxxx = MCU model number, e.g. Project_52352)
         ├── Makefile
-        ├── linker_script.ld
-        ├── startup_ht32fxxxx_gcc_xx.s
-        ├── ht32_syscalls.c
-        ├── ht32_retarget_gnu.c
+        ├── sources.list
         └── *.json
 ```
-
-> **49x series** (HT32F490x / 491x / 493x): `src/` includes board support files (`ht32fXXXxX_board.c/h`) instead of `ht32_op.c`.
 
 ---
 
@@ -150,46 +182,50 @@ Right-click menu:
 1. Click **Convert uVision Project** in the HT32 panel
 2. Select the `.uvprojx` (single project) or `.uvmpw` (multi-project workspace) file
 
-For `.uvmpw`, **all sub-projects are converted at once**, each into its own `.vscode/build-gen-{project-name}/` directory.
+For `.uvmpw`, **all sub-projects are converted at once**, each into its own directory named after the `.uvprojx` filename.
 
 **Auto-generated:**
 - `Makefile` (MCU, compiler flags, source files)
-- `linker_script.ld` (converted from Keil scatter file)
-- `startup_xxx_gcc.s` (converted from Keil startup)
+- Linker script (shared in `GNU_ARM/`): `linker_script.ld` if Keil scatter file present; otherwise taken directly from FWLib (`linker.ld` for standard series, `<chip>_FLASH.ld` for 49x series)
+- `startup_xxx_gcc.s` (converted from Keil startup, shared in `GNU_ARM/`)
 - `compile_commands.json` / `tasks.json` / `launch.json`
 
-**Single `.uvprojx`** — output to `.vscode/build-gen/`
+**Single `.uvprojx`** — output to `HT32_VSCode/GNU_ARM/` (shared files) + `HT32_VSCode/Project/` (Makefile & metadata)
 
-**`.uvmpw` multi-project** — one directory per sub-project, e.g. `Project_IAP.uvprojx` + `Project_AP.uvprojx`:
+**`.uvmpw` multi-project** — one directory per sub-project, named from the `.uvprojx` filename (e.g. `Project_IAP.uvprojx` + `Project_AP.uvprojx`):
 
 ```
-.vscode/
-├── tasks.json
-├── launch.json
-├── build-gen-iap/
-│   ├── Makefile
-│   ├── linker_script.ld
-│   └── *.json
-└── build-gen-ap/
-    ├── Makefile
-    ├── linker_script.ld
-    └── *.json
+<ProjectRoot>/
+├── MDK_ARMv5/             ← original Keil projects
+├── .clangd                ← auto-generated on project open (clangd config)
+└── HT32_VSCode/           ← VS Code workspace root
+    ├── .vscode/
+    │   ├── tasks.json
+    │   ├── launch.json
+    │   └── compile_commands.json
+    ├── GNU_ARM/           ← shared: startup .s, linker script, ht32_op.c, syscalls.c, ht32_stack_analysis.c
+    ├── Project_IAP/       ← named from uvprojx filename
+    │   ├── Makefile
+    │   └── *.json
+    └── Project_AP/
+        ├── Makefile
+        └── *.json
 ```
 
 Conversion warnings (e.g. prebuilt `.lib` files that cannot be used with GCC) appear in the VS Code **Problems** panel.
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/7.png" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/7.png" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
 ### Convert an HT32-IDE Project
 
 1. Click **Convert HT32-IDE Project** in the HT32 panel
-2. Select the project folder containing `.project` / `.cproject` (Eclipse CDT format)
+2. Select one or more project folders containing `.project` / `.cproject` (Eclipse CDT format) — **multiple folders can be selected at once**
 
-If the folder contains multiple sub-projects, all are converted at once, each into its own `build-gen-{suffix}/` directory. Conversion warnings appear in the VS Code **Problems** panel.
+Each selected folder is converted into its own directory inside `HT32_VSCode/`, sharing a common `HT32_VSCode/GNU_ARM/` for startup, linker script, and generated C files. Conversion warnings appear in the VS Code **Problems** panel.
 
 ---
 
@@ -198,18 +234,18 @@ If the folder contains multiple sub-projects, all are converted at once, each in
 - Click **Build** in the HT32 toolbar
 - Or press **Ctrl+Shift+B** to access VS Code tasks (Build, Build All, Clean, Download)
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-A **Post-Build** command can be configured in Settings to run automatically after a successful build (e.g. CRC calculation).
+A **Post-Build** command can be configured in Settings to run automatically after a successful build (e.g. CRC calculation). The working directory is `${workspaceFolder}` (the VS Code workspace root, i.e. the folder containing `.vscode/`). Sub-project folders such as `ProjectFolder/build/` are referenced relative to this root.
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
 ## Clean
 
 - Click **Clean** in the HT32 toolbar
-- Deletes all compiled output under `.vscode/build-gen/build/`
+- Deletes all compiled output under `HT32_VSCode/Project/build/` (or `HT32_VSCode/Project_xxx/build/` for multi-project)
 
 ---
 
@@ -221,7 +257,7 @@ A **Post-Build** command can be configured in Settings to run automatically afte
 2. Click **Download** in the HT32 toolbar
 3. Firmware is flashed automatically; progress is shown in the Terminal
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ### Flash Settings (configured in HT32 Settings)
 
@@ -256,13 +292,60 @@ Use this when the target board is already running and you don't need to reflash.
 | HT32 OpenOCD Debug | Compile → Flash → Start debug session |
 | HT32 OpenOCD Attach | Connect to running target without flashing |
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
+---
+
+## Stack Usage Analysis
+
+The **HT32 Stack Usage Analysis** panel (in the HT32 sidebar view) updates automatically every time the debugger halts (breakpoint, step, manual pause). It is the GCC/OpenOCD equivalent of Keil's stack analysis window.
+
+### Panel rows
+
+| Row | Description |
+|-----|-------------|
+| **System Mode** | `Normal` / `AP Mode` / `IAP Mode` — detected automatically from the ELF |
+| **Flash Start Addr** | Where this image links in flash (non-zero for AP images) |
+| **Stack Top Addr (Start)** | `__StackTop` — initial MSP, top of RAM. Shown with ⚠ in AP/IAP mode |
+| **Stack Bottom Addr (End/Limit)** | `__HT_check_sp` — bottom of the `.stack` section |
+| **Stack Size** | `__StackTop − __HT_check_sp` |
+| **Current Usage** | Bytes used since last halt |
+| **Peak Usage** | All-time high (paint watermark when enabled, otherwise session peak) |
+| **Peak Addr** | Address of the peak watermark / lowest SP seen this session |
+
+### IAP / AP mode detection
+
+The extension reads the ELF's PT_LOAD segments to detect the project type automatically — no configuration required:
+
+| Detected mode | Condition |
+|---------------|-----------|
+| **AP Mode** | ELF flash start address > MCU flash base (image links at a non-zero flash offset) |
+| **IAP Mode** | ELF flash start == MCU flash base, but binary footprint < 50 % of MCU total flash |
+| **Normal** | Everything else |
+
+### Enabling peak (watermark) tracking
+
+By default only current usage and session peak are shown. To enable all-time peak tracking:
+
+1. Add `-DHTCFG_STACK_USAGE_ANALYSIS=1` to **Extra C Flags** in HT32 Settings → Compiler tab
+2. Call `StackUsageAnalysisInit()` once at startup (before the RTOS scheduler or main loop)
+
+```c
+#include "ht32_stack_analysis.h"
+
+int main(void) {
+    StackUsageAnalysisInit();   // paints stack with sentinel pattern
+    // ... rest of init
+}
+```
+
+Without both steps the **Peak Usage** row shows a reminder instead of a value.
 
 ---
 
 ## HT32 Settings
 
-Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. Settings auto-save 3 seconds after any change and are stored in `.vscode/build-gen/project.settings.json`.
+Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. Settings auto-save 3 seconds after any change and are stored in `HT32_VSCode/Project/project.settings.json` (or `HT32_VSCode/Project_xxx/project.settings.json` for multi-project).
 
 ### Compiler Tab
 
@@ -282,7 +365,7 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 | Extra CFLAGS | Additional compiler flags, e.g. `-DDEBUG` |
 | Extra LDFLAGS | Additional linker flags |
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/15.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/15.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -299,8 +382,8 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 | Erase Mode | `erase_sector` (default) / `erase_chip` / `none` |
 | Flash Loaders | Add external flash loaders (e.g. SPI Flash) |
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/16.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/17.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/16.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/17.png" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -318,7 +401,7 @@ Toolchain paths are stored in VS Code User Settings and shared across all projec
 
 ## Configuration Wizard
 
-The **Holtek HT32 Configuration Wizard** extension (installed automatically) provides a visual editor for HT32 firmware configuration files, compatible with Keil MDK Configuration Wizard syntax.
+The **Holtek Configuration Wizard** extension (installed automatically) provides a visual editor for HT32 firmware configuration files, compatible with Keil MDK Configuration Wizard syntax.
 
 **Supported files:**
 
@@ -332,8 +415,8 @@ The **Holtek HT32 Configuration Wizard** extension (installed automatically) pro
 **How to open:**
 
 - **Editor title button (recommended):** Open a supported `.h` / `.c` / `.s` file, then click the **Preview** button in the editor title bar. Click **Go to File** to switch back to text editing.
-- **Right-click menu:** Right-click the file in Explorer → **Open in Holtek HT32 Configuration Wizard**
-- **Command Palette:** `Ctrl+Shift+P` → **HT32: Open in Holtek HT32 Configuration Wizard**
+- **Right-click menu:** Right-click the file in Explorer → **Open in Holtek Configuration Wizard**
+- **Command Palette:** `Ctrl+Shift+P` → **HT32: Open in Holtek Configuration Wizard**
 
 **Control types:**
 
@@ -353,11 +436,12 @@ Changes are written back to the source file immediately; only the modified value
 
 After conversion or project creation, the extension auto-generates:
 
-- `.clangd` (workspace root) — include paths, compiler flags
+- `.clangd` (project root, one level above `HT32_VSCode/`) — generated automatically on project open
+- `.clangd` (FWLib root) — also generated on project open (minimal, `UnusedIncludes: None` only); ensures clangd does not show warnings in FWLib internal files (e.g. `utilities/`, `library/`)
 - `.vscode/compile_commands.json` — merged for clangd
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/13.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/14.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/13.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/14.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 Recommended: install the **clangd** extension (`llvm-vs-code-extensions.vscode-clangd`) and disable the built-in C/C++ IntelliSense to avoid conflicts.
 
@@ -368,23 +452,22 @@ Recommended: install the **clangd** extension (`llvm-vs-code-extensions.vscode-c
 After conversion or project creation:
 
 ```
-<workspace>/
-├── .clangd                       ← clangd config (workspace root)
-├── src/                          ← User source files
-│   ├── main.c
-│   ├── ht32fxxxx_it.c
-│   └── ...
-└── .vscode/
-    ├── tasks.json
-    ├── launch.json
-    ├── compile_commands.json     ← Merged for clangd
-    └── build-gen/
+<ProjectRoot>/
+├── MDK_ARMv5/ (or src/)          ← original Keil project / user sources
+├── .clangd                       ← auto-generated on project open (clangd config)
+└── HT32_VSCode/                  ← VS Code workspace root
+    ├── .vscode/
+    │   ├── tasks.json
+    │   ├── launch.json
+    │   └── compile_commands.json ← merged for clangd
+    ├── GNU_ARM/                  ← shared generated GCC support files
+    │   ├── startup_xxx_gcc.s
+    │   ├── linker_script.ld      ← from Keil scatter; or linker.ld / <chip>_FLASH.ld from FWLib
+    │   ├── ht32_op.c             ← uVision only
+    │   ├── syscalls.c
+    │   └── ht32_stack_analysis.c
+    └── Project/                  ← Makefile & build metadata (Project_xxx/ for multi-project)
         ├── Makefile
-        ├── linker_script.ld
-        ├── startup_xxx.s
-        ├── ht32_syscalls.c
-        ├── ht32_retarget_gnu.c
-        ├── compile_commands.json
         ├── sources.list
         ├── project.meta.json
         ├── project.settings.json
@@ -398,7 +481,7 @@ After conversion or project creation:
 | Command | Description |
 |---------|-------------|
 | `HT32: Create Project` | Open Create Project wizard |
-| `HT32: Open Project` | Open an existing HT32 project folder |
+| `HT32: Open Project` | Open a `.ht32ws` project file |
 | `HT32: Convert uVision Project` | Import Keil `.uvprojx` / `.uvmpw` |
 | `HT32: Convert HT32-IDE Project` | Import Eclipse CDT `.project` |
 | `HT32: Build` | Run build task |
@@ -434,8 +517,7 @@ Flash/download support (via bundled OpenOCD + HLM loaders) is available for ~100
 | `openocd/` | OpenOCD Windows x64 + ~90 HT32 MCU `.cfg` files + HLM flash loaders |
 | `bin/win32-x64/make.exe` | GNU Make Windows x64 |
 | `dfp/Holtek/HT32_DFP/` | CMSIS DFP (multiple versions) — SVD files for peripheral register view |
-| `templates/M0_GNU_ARM/` | Cortex-M0 startup `.s`, linker script template |
-| `templates/M3_GNU_ARM/` | Cortex-M3/M4 startup `.s`, linker script template |
+| `templates/GNU_ARM/` | Startup `.s`, `syscalls.c`, `ht32_stack_analysis.c` templates (linker script is sourced from FWLib at conversion time) |
 
 ---
 
