@@ -19,7 +19,7 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 | **HT32 Settings** | WebView panel for compiler flags, debug interface, post-build commands |
 | **Project File Tree** | Source groups view with add/remove files and groups |
 | **clangd / IntelliSense** | Auto-generates `.clangd` and merged `compile_commands.json` |
-| **Configuration Wizard** | Visual editor for HT32 config files (`conf.h`, `system_ht32.c`, `usbdconf.h`, `startup.s`) — Keil-compatible wizard syntax |
+| **Configuration Wizard** | Visual editor for HT32 config files (`conf.h`, `usbdconf.h`, `startup.s`) — Keil-compatible wizard syntax |
 
 ---
 
@@ -28,12 +28,12 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 | Item | Description |
 |------|-------------|
 | **OS** | Windows x64 |
-| **Debug probe** | Holtek e-Link32 Pro or e-Link32 Lite (recommended); J-Link and ST-Link also supported |
+| **Debug probe** | Holtek e-Link32 Pro or e-Link32 Lite; J-Link and ST-Link also supported |
 | **FWLib** | Required; supports HT32F1xxxx / HT32F4xxxx / HT32F5xxxx / HT32F490x1 / HT32F491x3 / HT32F493x5 |
 
+> **OpenOCD:** Bundled.<br>
 > **GCC toolchain:** Auto-detected on startup; installed automatically via winget if not found, or set manually in settings.<br>
-> **OpenOCD:** Bundled — no separate installation needed.<br>
-> **Extension dependencies:** [Cortex-Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and [Holtek Configuration Wizard](https://marketplace.visualstudio.com/items?itemName=holtek-semi.ht32-config-wizard) are installed automatically.
+> **Extension dependencies:** [Cortex-Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and [Holtek Configuration Wizard](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode) are installed automatically.
 
 ---
 
@@ -44,6 +44,9 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 1. VS Code → Extensions → `...` → **Install from VSIX...**
 2. Select `ht32-proj-assistant-x.x.x.vsix`
 
+> **Note:** VS Code resolves extension dependencies from the Marketplace automatically.
+> If a required dependency is not published on the Marketplace, the installation will fail.
+
 <table><tr>
 <td><img src="media/1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
 <td><img src="media/2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
@@ -53,7 +56,7 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 
 **Option B — From Marketplace**
 
-1. Search `Holtek HT32 VS Code Extension` in the Extensions view
+1. Search `Holtek HT32 VS Code Extension` in the Extensions view (searching `holtek` or `ht32` also works)
 2. Click **Install**
 
 <img src="media/3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
@@ -75,25 +78,28 @@ After installation, the **HT32 icon** appears in the Activity Bar. Click it to o
 | Button | Action |
 |--------|--------|
 | Build | Compile (runs make) |
-| Debug | Start Cortex-Debug session via OpenOCD |
+| Debug | Start Cortex-Debug session via OpenOCD (Flash & Debug or Attach) |
 | Clean | Delete the `build/` output directory |
 | Download | Flash firmware without starting a debug session |
 | Settings | Open HT32 Settings WebView |
-| `{}` Generate Config | Regenerate `tasks.json` and `launch.json` |
+| Generate Config | Regenerate `tasks.json` and `launch.json` |
+| Open Project | Open a `.ht32ws` project file |
+| Close Project | Close the currently loaded project |
 
 ---
 
-**Project File Tree** (bottom of the HT32 panel) shows source groups — the same group concept as Keil uVision.
+**Project File Tree** shows source groups — the same group concept as Keil uVision.
 
-<img src="media/5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;"><br>
 
 Right-click menu:
 
 | Target | Actions |
 |--------|---------|
-| Project root | Add group |
-| Group | Add file, Remove group |
-| File | Remove from group, Delete from disk |
+| Tree root (`.ht32ws`) | Rename Project File, Add Project |
+| Sub-project node | Add Group, Remove Project from Workspace |
+| Group | Add Files to Group, Remove Group |
+| File | Remove from Group, Delete File |
 
 ---
 
@@ -118,7 +124,7 @@ A `.ht32ws` file can list multiple sub-project directories (e.g. `Project_IAP` a
 | Action | How |
 |--------|-----|
 | **Add Project to Workspace** | Right-click the root node → **Add Project to Workspace** — select from available directories in the same folder |
-| **Remove Project from Workspace** | Right-click a project node → **Remove Project from Workspace** — removes it from the list (files on disk are not deleted) |
+| **Remove Project from Workspace** | Right-click a project node → **Remove Project from Workspace** — removes it from the list (files on disk are not deleted). Not available when only one project remains. |
 
 ### Renaming a project
 
@@ -212,6 +218,15 @@ For `.uvmpw`, **all sub-projects are converted at once**, each into its own dire
         └── *.json
 ```
 
+> **IAP path convention — embedding one project's binary into another:**
+> `.incbin` in GCC assembly or C inline `asm(".incbin ...")` resolves paths relative to the **make working directory** (`HT32_VSCode/Project_xxx/`), not the source file location.
+> ```c
+> /* in iap.c — path is relative to HT32_VSCode/Project_IAP/ */
+> asm(".incbin \"../Project_AP/build/AP.bin\"");
+> ```
+> `..` navigates from `Project_IAP/` up to `HT32_VSCode/`, then into `Project_AP/build/`.
+> Note: Keil `INCBIN` in `.s` files uses the `.s` file's directory as the base — the paths differ.
+
 Conversion warnings (e.g. prebuilt `.lib` files that cannot be used with GCC) appear in the VS Code **Problems** panel.
 
 <img src="media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
@@ -236,7 +251,7 @@ Each selected folder is converted into its own directory inside `HT32_VSCode/`, 
 
 <img src="media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-A **Post-Build** command can be configured in Settings to run automatically after a successful build (e.g. CRC calculation). The working directory is `${workspaceFolder}` (the VS Code workspace root, i.e. the folder containing `.vscode/`). Sub-project folders such as `ProjectFolder/build/` are referenced relative to this root.
+A **Post-Build** command can be configured in Settings to run automatically after a successful build (e.g. CRC calculation). The working directory is `${workspaceFolder}` (= `HT32_VSCode/`, the VS Code workspace root). Sub-project folders such as `Project_xxx/build/` are referenced relative to this root.
 
 <img src="media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
@@ -391,7 +406,7 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 
 | Setting | Description |
 |---------|-------------|
-| Post-Build | Command to run after a successful build (working dir: `${workspaceFolder}`) |
+| Post-Build | Command to run after a successful build (working dir: `${workspaceFolder}` = `HT32_VSCode/`) |
 | GCC Path | `arm-none-eabi-gcc` path (blank = auto-detect) — machine-wide |
 | OpenOCD Path | OpenOCD path (blank = use bundled OpenOCD) — machine-wide |
 

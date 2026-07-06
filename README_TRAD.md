@@ -1,23 +1,37 @@
 [English](http://mcutest.holtek.com.tw/ht32-vscode/) | [中文使用手冊](#holtek-ht32-vs-code-extension)
 
 # Holtek HT32 VS Code Extension
-Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 
-- 支援 HT32 全系列（Cortex-M0+/M3/M4）
-- 建立新專案 / 匯入 Keil uVision / 匯入 HT32-IDE
-- 一鍵編譯、燒錄、除錯；內建 OpenOCD + e-Link32 支援
+Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功能。支援匯入 Keil uVision 與 HT32-IDE 專案，或從零建立新專案，並透過內建 OpenOCD 與 e-Link32 探針實現一鍵編譯、燒錄與除錯。
+
+---
+
+## 功能特色
+
+| 功能 | 說明 |
+|------|------|
+| **建立新專案** | 精靈式專案產生器，支援 HT32 FWLib（標準系列與 49x 系列） |
+| **匯入 uVision** | 匯入 Keil `.uvprojx` / `.uvmpw` 專案，自動產生 Makefile、連結腳本、clangd 設定 |
+| **匯入 HT32-IDE** | 匯入一個或多個 Eclipse CDT `.project`/`.cproject` 專案資料夾（支援多選） |
+| **編譯 / 清除** | 一鍵或工具列按鈕；支援複合式 Post-Build 任務 |
+| **燒錄（Download）** | 透過內建 OpenOCD + e-Link32 Pro/Lite 燒錄韌體 |
+| **除錯（Debug）** | Cortex-Debug + 內建 OpenOCD；支援 Flash & Debug 或 Attach 模式 |
+| **HT32 Settings** | 提供編譯器旗標、除錯介面、Post-Build 指令的 WebView 設定面板 |
+| **專案檔案樹** | 原始碼群組檢視，支援新增/移除檔案與群組 |
+| **clangd / IntelliSense** | 自動產生 `.clangd` 與合併後的 `compile_commands.json` |
+| **設定精靈** | HT32 設定檔視覺化編輯器（`conf.h`、`usbdconf.h`、`startup.s`），相容 Keil 精靈語法 |
 
 ## 安裝需求
 
 | 項目 | 說明 |
 |------|------|
 | 作業系統 | Windows x64 |
-| 除錯器 | Holtek e-Link32 Pro / Lite（推薦）；支援 J-Link、ST-Link |
+| 除錯器 | Holtek e-Link32 Pro / Lite；支援 J-Link、ST-Link |
 | FWLib | 需要；支援 HT32F1xxxx / HT32F4xxxx / HT32F5xxxx / HT32F490x1 / HT32F491x3 / HT32F493x5 |
 
+> **OpenOCD**：已內建<br>
 > **GCC 工具鏈**：擴充功能啟動時自動偵測；找不到時透過 winget 自動安裝<br>
-> **OpenOCD**：已內建，無需另外安裝<br>
-> **相依擴充功能**：安裝時自動一併安裝 **Cortex-Debug**（除錯介面）與 **Holtek HT32 Configuration Wizard**（設定精靈）
+> **相依擴充功能**：安裝時自動一併安裝 **Cortex-Debug**（除錯介面）與 **Holtek HT32 Configuration Wizard**（[設定精靈](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode)）
 
 ---
 ## 安裝擴充功能
@@ -27,6 +41,9 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 1. VS Code → 擴充功能 → `...` → **Install from VSIX...**
 2. 選取 `ht32-vscode-x.x.x.vsix`
 
+> **注意：** VS Code 會自動從 Marketplace 尋找並安裝擴充功能的相依套件。
+> 若相依套件尚未發布至 Marketplace，安裝將會失敗。
+
 <table><tr>
 <td><img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/1.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
 <td><img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/2.jpg" width="350" style="border:1px solid #ccc; border-radius:4px; padding:3px;"></td>
@@ -35,51 +52,50 @@ Holtek HT32 系列 Cortex-M 微控制器專用 VS Code 擴充功能
 ---
 **方法二：從 Marketplace 安裝**
 
-1. 擴充功能搜尋欄輸入 `Holtek HT32 VS Code Extension`
+1. 擴充功能搜尋欄輸入 `Holtek HT32 VS Code Extension`（或直接搜尋 `holtek` / `ht32` 即可找到）
 2. 點 **Install**
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
-## 介面介紹 — 專案未開啟
+## 介面介紹
 
 安裝後，左側 Activity Bar 出現 **HT32 圖示**，點擊展開 HT32 面板。
 
-專案未開啟時顯示 **Create / Open / Convert** 按鈕；若有歷史記錄，下方會列出 **Recent Projects**，點擊即可直接開啟。
+**專案未開啟時**顯示 **Create / Open / Convert** 按鈕；若有歷史記錄，下方會列出 **Recent Projects**，點擊即可直接開啟。
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-
 ---
 
-## 介面介紹 — 專案已開啟時的工具列
-
+**工具列按鈕（專案載入後顯示）：**
 
 | 按鈕 | 功能 |
 |------|------|
-| Build | 編譯 |
-| Debug | 除錯 |
-| Clean | 清除 |
-| Download | 燒錄 |
-| Settings | 專案設定 |
-| Generate Config | 重新產生 tasks.json / launch.json |
+| Build | 編譯（執行 make） |
+| Debug | 透過 OpenOCD 啟動 Cortex-Debug 除錯（Flash & Debug 或 Attach 模式） |
+| Clean | 刪除 `build/` 輸出目錄 |
+| Download | 燒錄韌體（不啟動除錯） |
+| Settings | 開啟 HT32 Settings WebView |
+| Generate Config | 重新產生 `tasks.json` 與 `launch.json` |
+| Open Project | 開啟 `.ht32ws` 專案檔 |
+| Close Project | 關閉目前載入的專案 |
 
 ---
 
-## 介面介紹 — 專案檔案樹
-
-HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 Keil uVision 的群組概念相同。
+**專案檔案樹**顯示原始碼群組結構，與 Keil uVision 的群組概念相同。
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/5.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-右鍵選單支援以下操作：
+右鍵選單：
 
 | 對象 | 操作 |
 |------|------|
-| 專案根節點 | 新增群組 |
-| 群組 | 新增檔案、移除群組 |
-| 檔案 | 從群組移除、從磁碟刪除 |
+| 樹狀根節點（`.ht32ws`） | Rename Project File、Add Project |
+| 子專案節點 | Add Group、Remove Project from Workspace |
+| 群組 | Add Files to Group、Remove Group |
+| 檔案 | Remove from Group、Delete File |
 
 ---
 
@@ -91,10 +107,20 @@ HT32 面板下方顯示專案的原始碼群組結構（Source Groups），與 K
 
 | 方式 | 說明 |
 |------|------|
-| **Open Project**（`HT32: Open Project`） | 瀏覽並開啟 `.ht32ws` 專案檔 — 重新開啟專案的建議方式 |
+| **雙擊 `.ht32ws`** | 在檔案總管雙擊 `.ht32ws` 檔案，直接開啟專案 |
+| **Open Project**（`HT32: Open Project`） | 透過指令瀏覽並開啟 `.ht32ws` 專案檔 |
 | **Recent Projects** | 點擊最近開啟清單中的任一項目（專案未開啟時顯示） |
 
-透過 `.ht32ws` 開啟時，**TreeView 根節點**顯示專案名稱（即 `.ht32ws` 的檔名去掉副檔名）。
+透過 `.ht32ws` 開啟時，**TreeView 根節點**顯示專案名稱（即 `.ht32ws` 的檔名去掉副檔名）。TreeView、工具列 QuickPick 與 Settings WebView 僅顯示 `.ht32ws` 中列出的子專案。
+
+### 管理子專案
+
+一個 `.ht32ws` 可包含多個子專案目錄（例如 `Project_IAP` 與 `Project_AP`），無需重新轉換即可隨時新增或移除。
+
+| 操作 | 方式 |
+|------|------|
+| **新增子專案** | 在根節點按右鍵 → **Add Project to Workspace**，從同一資料夾中選擇可用目錄 |
+| **移除子專案** | 在專案節點按右鍵 → **Remove Project from Workspace**，從清單中移除（磁碟上的檔案不會刪除）。僅剩一個子專案時無法執行。 |
 
 ### 重新命名專案
 
@@ -186,6 +212,15 @@ MyProject/                 ← 使用者命名的專案資料夾
         └── *.json
 ```
 
+> **IAP 路徑說明 — 將另一個子專案的 binary 嵌入原始碼：**
+> GCC 組合語言或 C 的 `asm(".incbin ...")` 中，`.incbin` 的路徑以 **make 工作目錄**（`HT32_VSCode/Project_xxx/`）為基準，而非原始碼檔案所在目錄。
+> ```c
+> /* 在 iap.c 中 — 路徑相對於 HT32_VSCode/Project_IAP/ */
+> asm(".incbin \"../Project_AP/build/AP.bin\"");
+> ```
+> `..` 從 `Project_IAP/` 往上到 `HT32_VSCode/`，再進入 `Project_AP/build/`。
+> 注意：Keil `.s` 檔中的 `INCBIN` 以 `.s` 檔所在目錄為基準，兩者不同。
+
 **轉換警告**（如 Keil 預編譯 `.lib` 無法用於 GCC 工具鏈）會顯示在 VS Code **Problems** 面板中。
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
@@ -212,7 +247,7 @@ MyProject/                 ← 使用者命名的專案資料夾
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-也可在「專案設定」中設定 **Post-Build** 命令，Build 成功後自動執行（例如 CRC 計算）。執行時的工作目錄為 `${workspaceFolder}`（即 VS Code workspace 根目錄，也就是存放 `.vscode/` 的資料夾），子專案目錄如 `ProjectFolder/build/` 均相對此路徑。
+也可在「專案設定」中設定 **Post-Build** 命令，Build 成功後自動執行（例如 CRC 計算）。執行時的工作目錄為 `${workspaceFolder}`（即 `HT32_VSCode/`，VS Code workspace 根目錄），子專案目錄如 `Project_xxx/build/` 均相對此路徑。
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
@@ -364,7 +399,7 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 
 | 設定項目 | 說明 |
 |----------|------|
-| Post-Build | Build 後執行的命令（工作目錄：`${workspaceFolder}`） |
+| Post-Build | Build 後執行的命令（工作目錄：`${workspaceFolder}` = `HT32_VSCode/`） |
 | GCC Path | `arm-none-eabi-gcc` 路徑（空白 = 自動偵測或 winget 安裝） |
 | OpenOCD Path | OpenOCD 路徑（空白 = 使用 bundled OpenOCD） |
 
