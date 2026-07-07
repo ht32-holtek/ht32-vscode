@@ -1,10 +1,12 @@
-[中文使用手冊](README_TRAD.md) | [English](#holtek-ht32-vs-code-extension)
+﻿[中文使用手冊](README_TRAD.md) | [English](#holtek-ht32-vs-code-extension)
 
 # Holtek HT32 VS Code Extension
 
 A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3/M4). Converts Keil uVision and HT32-IDE projects to a Makefile workflow, or creates new projects from scratch — with one-click build, flash, and debug via the bundled OpenOCD and e-Link32 probe.
 
 ---
+
+<br>
 
 ## Features
 
@@ -16,12 +18,14 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 | **Build / Clean** | One-click or toolbar buttons; compound post-build task support |
 | **Download (Flash)** | Flash firmware via bundled OpenOCD + e-Link32 Pro/Lite |
 | **Debug** | Cortex-Debug + bundled OpenOCD; Flash & Debug or Attach mode |
-| **HT32 Settings** | WebView panel for compiler flags, debug interface, post-build commands |
+| **Project Settings** | WebView panel for compiler flags, debug interface, post-build commands |
 | **Project File Tree** | Source groups view with add/remove files and groups |
-| **clangd / IntelliSense** | Auto-generates `.clangd` and merged `compile_commands.json` |
 | **Configuration Wizard** | Visual editor for HT32 config files (`conf.h`, `usbdconf.h`, `startup.s`) — Keil-compatible wizard syntax |
+| **clangd / IntelliSense** | Auto-generates `.clangd` and merged `compile_commands.json` |
 
 ---
+
+<br>
 
 ## Requirements
 
@@ -36,6 +40,8 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 > **Extension dependencies:** [Cortex-Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and [Holtek Configuration Wizard](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode) are installed automatically.
 
 ---
+
+<br>
 
 ## Installation
 
@@ -54,6 +60,8 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 
 ---
 
+<br>
+
 **Option B — From Marketplace**
 
 1. Search `Holtek HT32 VS Code Extension` in the Extensions view (searching `holtek` or `ht32` also works)
@@ -62,6 +70,8 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 <img src="media/3.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
+
+<br>
 
 ## Interface Overview
 
@@ -73,6 +83,8 @@ After installation, the **HT32 icon** appears in the Activity Bar. Click it to o
 
 ---
 
+<br>
+
 **Toolbar buttons (visible when a project is loaded):**
 
 | Button | Action |
@@ -83,10 +95,18 @@ After installation, the **HT32 icon** appears in the Activity Bar. Click it to o
 | Download | Flash firmware without starting a debug session |
 | Settings | Open HT32 Settings WebView |
 | Generate Config | Regenerate `tasks.json` and `launch.json` |
-| Open Project | Open a `.ht32ws` project file |
+
+The **`···` (More Actions)** menu also contains:
+
+| Item | Action |
+|------|--------|
+| Create Project | Open the Create Project wizard (can be used while a project is open) |
+| Open Project | Open a `.ht32vs` project file |
 | Close Project | Close the currently loaded project |
 
 ---
+
+<br>
 
 **Project File Tree** shows source groups — the same group concept as Keil uVision.
 
@@ -96,43 +116,45 @@ Right-click menu:
 
 | Target | Actions |
 |--------|---------|
-| Tree root (`.ht32ws`) | Rename Project File, Add Project |
+| Tree root (`.ht32vs`) | Rename Project File, Add Project |
 | Sub-project node | Add Group, Remove Project from Workspace |
 | Group | Add Files to Group, Remove Group |
 | File | Remove from Group, Delete File |
 
 ---
 
-## Project File (.ht32ws)
+<br>
 
-Every HT32 project is associated with a **`.ht32ws` project file** (stored inside `HT32_VSCode/`). This file records which sub-project directories belong to the workspace and is created automatically after conversion or project creation.
+## Project File (.ht32vs)
+
+Every HT32 project is associated with a **`.ht32vs` project file** (stored inside `HT32_VSCode/`). This file records which sub-project folders belong to the project and is created automatically after conversion or project creation.
 
 ### Opening a project
 
 | Method | Description |
 |--------|-------------|
-| **Double-click `.ht32ws`** | Double-click a `.ht32ws` file in Explorer — opens the project directly |
-| **Open Project** (`HT32: Open Project`) | Browse for a `.ht32ws` file via command |
+| **Double-click `.ht32vs`** | Double-click a `.ht32vs` file in Explorer — opens the project directly |
+| **Open Project** | Browse for a `.ht32vs` file via the `···` menu or `HT32: Open Project` command |
 | **Recent Projects** | Click any entry in the Recent Projects list (shown when no project is open) |
-
-When a project is opened via `.ht32ws`, the **TreeView root node** shows the project name (the `.ht32ws` filename without extension). Only the sub-projects listed in the `.ht32ws` file are shown in the TreeView, toolbar QuickPick, and Settings WebView.
 
 ### Managing sub-projects
 
-A `.ht32ws` file can list multiple sub-project directories (e.g. `Project_IAP` and `Project_AP`). You can add or remove entries at any time without re-converting.
+A `.ht32vs` file can list multiple sub-project folders (e.g. `Project_IAP` and `Project_AP`). You can add or remove entries at any time without re-converting.
 
 | Action | How |
 |--------|-----|
-| **Add Project to Workspace** | Right-click the root node → **Add Project to Workspace** — select from available directories in the same folder |
+| **Add Project to Workspace** | Right-click the root node → **Add Project to Workspace** — select from available folders in the same location |
 | **Remove Project from Workspace** | Right-click a project node → **Remove Project from Workspace** — removes it from the list (files on disk are not deleted). Not available when only one project remains. |
 
 ### Renaming a project
 
-Right-click the root node in the Project Tree → **Rename Project File**. This renames the `.ht32ws` file on disk and updates the Recent Projects list automatically.
+Right-click the root node in the Project Tree → **Rename Project File**. This renames the `.ht32vs` file on disk and updates the Recent Projects list automatically.
 
-> Rename is only available when a `.ht32ws` file is active (not in Open Folder mode).
+> Rename is only available when a `.ht32vs` file is active (not in Open Folder mode).
 
 ---
+
+<br>
 
 ## Getting Started
 
@@ -140,55 +162,70 @@ Right-click the root node in the Project Tree → **Rename Project File**. This 
 
 > Requires HT32 FWLib downloaded from the Holtek website.
 
-1. Click the **HT32** icon in the Activity Bar → **Create Project** (the `+` button)
-2. Follow the wizard:
+Click **Create Project** from the `···` menu (or from the welcome screen when no project is open). The wizard opens as a panel with three sections:
 
-| Step | Action |
-|------|--------|
-| ① | Select the **HT32 FWLib root folder** |
-| ② | Choose **MCU model** |
-| ③ | Choose output type: **Application** or **Library** |
-| ④ | Enter **project name** and save location |
+**① FWLib** — Enter or browse to the HT32 FWLib root folder. Previously used paths appear as a Recent list for quick selection.
+
+**② MCU** — Choose the target MCU from the dropdown (populated automatically based on the detected FWLib series).
+
+**③ Project**
+
+| Field | Description |
+|-------|-------------|
+| Output Type | **Executable (.elf)** or **Library (.a)** |
+| Project Name | Used as the ELF/HEX filename and sub-project folder name |
+| Project Folder | Parent folder where the project will be created |
+
+Click **Generate** to create the project. If a project is currently open and the target folder is the same workspace, you will be asked whether to add the new project to it.
+
+> **Running while a project is open:** Create Project can be launched from the `···` menu at any time — it does not require closing the current project first.
 
 <img src="media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
+<br>
+
 ### Generated File Structure
 
 ```
 MyProject/                 ← user-named project folder
-├── src/                   ← user source files
-│   ├── main.c
-│   ├── ht32fxxxx_it.c
-│   ├── system_ht32fxxxx.c
-│   ├── ht32fxxxx_conf.h
-│   └── ht32_op.c
 ├── .clangd                ← auto-generated on project open (clangd config)
 └── HT32_VSCode/           ← VS Code workspace root
     ├── .vscode/
     │   ├── tasks.json
     │   ├── launch.json
     │   └── compile_commands.json
-    ├── GNU_ARM/           ← generated GCC support files
-    │   ├── startup_ht32fxxxx_gcc_xx.s
-    │   ├── linker.ld
-    │   ├── syscalls.c
-    │   └── ht32_stack_analysis.c
-    └── Project_xxxxx/     ← Makefile & build metadata (xxxxx = MCU model number, e.g. Project_52352)
+    ├── <projectName>.ht32vs
+    └── <projectName>/     ← named from the project name entered in the wizard
         ├── Makefile
         ├── sources.list
-        └── *.json
+        ├── *.json
+        ├── src/           ← user source files
+        │   ├── main.c
+        │   ├── ht32fxxxx_it.c
+        │   ├── system_ht32fxxxx.c
+        │   ├── ht32fxxxx_conf.h
+        │   └── ht32_op.c
+        └── GNU_ARM/       ← generated GCC support files
+            ├── startup_ht32fxxxx_gcc_xx.s
+            ├── linker.ld
+            ├── syscalls.c
+            └── ht32_stack_analysis.c
 ```
 
+To add a second project to the same workspace folder, run **Create Project** again while the workspace is open. When prompted, select **Yes** to add the new project to the currently open workspace. Each project is fully self-contained under its own `<projectName>/` folder.
+
 ---
+
+<br>
 
 ### Convert a Keil uVision Project
 
 1. Click **Convert uVision Project** in the HT32 panel
 2. Select the `.uvprojx` (single project) or `.uvmpw` (multi-project workspace) file
 
-For `.uvmpw`, **all sub-projects are converted at once**, each into its own directory named after the `.uvprojx` filename.
+For `.uvmpw`, **all sub-projects are converted at once**, each into its own folder named after the `.uvprojx` filename.
 
 **Auto-generated:**
 - `Makefile` (MCU, compiler flags, source files)
@@ -198,7 +235,7 @@ For `.uvmpw`, **all sub-projects are converted at once**, each into its own dire
 
 **Single `.uvprojx`** — output to `HT32_VSCode/GNU_ARM/` (shared files) + `HT32_VSCode/Project/` (Makefile & metadata)
 
-**`.uvmpw` multi-project** — one directory per sub-project, named from the `.uvprojx` filename (e.g. `Project_IAP.uvprojx` + `Project_AP.uvprojx`):
+**`.uvmpw` multi-project** — one folder per sub-project, named from the `.uvprojx` filename (e.g. `Project_IAP.uvprojx` + `Project_AP.uvprojx`):
 
 ```
 <ProjectRoot>/
@@ -235,14 +272,18 @@ Conversion warnings (e.g. prebuilt `.lib` files that cannot be used with GCC) ap
 
 ---
 
+<br>
+
 ### Convert an HT32-IDE Project
 
 1. Click **Convert HT32-IDE Project** in the HT32 panel
 2. Select one or more project folders containing `.project` / `.cproject` (Eclipse CDT format) — **multiple folders can be selected at once**
 
-Each selected folder is converted into its own directory inside `HT32_VSCode/`, sharing a common `HT32_VSCode/GNU_ARM/` for startup, linker script, and generated C files. Conversion warnings appear in the VS Code **Problems** panel.
+Each selected folder is converted into its own folder inside `HT32_VSCode/`, sharing a common `HT32_VSCode/GNU_ARM/` for startup, linker script, and generated C files. Conversion warnings appear in the VS Code **Problems** panel.
 
 ---
+
+<br>
 
 ## Build
 
@@ -257,12 +298,16 @@ A **Post-Build** command can be configured in Settings to run automatically afte
 
 ---
 
+<br>
+
 ## Clean
 
 - Click **Clean** in the HT32 toolbar
 - Deletes all compiled output under `HT32_VSCode/Project/build/` (or `HT32_VSCode/Project_xxx/build/` for multi-project)
 
 ---
+
+<br>
 
 ## Flash Firmware
 
@@ -282,6 +327,8 @@ A **Post-Build** command can be configured in Settings to run automatically afte
 | Erase Mode | Erase Sector (default) / Erase Chip / None |
 
 ---
+
+<br>
 
 ## Debug
 
@@ -310,6 +357,8 @@ Use this when the target board is already running and you don't need to reflash.
 <img src="media/11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
+
+<br>
 
 ## Stack Usage Analysis
 
@@ -358,6 +407,8 @@ Without both steps the **Peak Usage** row shows a reminder instead of a value.
 
 ---
 
+<br>
+
 ## HT32 Settings
 
 Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. Settings auto-save 3 seconds after any change and are stored in `HT32_VSCode/Project/project.settings.json` (or `HT32_VSCode/Project_xxx/project.settings.json` for multi-project).
@@ -384,6 +435,8 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 
 ---
 
+<br>
+
 ### Debugger Tab
 
 | Setting | Options |
@@ -402,6 +455,8 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 
 ---
 
+<br>
+
 ### Build Tab
 
 | Setting | Description |
@@ -413,6 +468,8 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 Toolchain paths are stored in VS Code User Settings and shared across all projects.
 
 ---
+
+<br>
 
 ## Configuration Wizard
 
@@ -447,6 +504,8 @@ Changes are written back to the source file immediately; only the modified value
 
 ---
 
+<br>
+
 ## IntelliSense (clangd)
 
 After conversion or project creation, the extension auto-generates:
@@ -461,6 +520,8 @@ After conversion or project creation, the extension auto-generates:
 Recommended: install the **clangd** extension (`llvm-vs-code-extensions.vscode-clangd`) and disable the built-in C/C++ IntelliSense to avoid conflicts.
 
 ---
+
+<br>
 
 ## Output Structure
 
@@ -491,12 +552,14 @@ After conversion or project creation:
 
 ---
 
+<br>
+
 ## Commands (Ctrl+Shift+P → "HT32")
 
 | Command | Description |
 |---------|-------------|
 | `HT32: Create Project` | Open Create Project wizard |
-| `HT32: Open Project` | Open a `.ht32ws` project file |
+| `HT32: Open Project` | Browse for and open a `.ht32vs` project file |
 | `HT32: Convert uVision Project` | Import Keil `.uvprojx` / `.uvmpw` |
 | `HT32: Convert HT32-IDE Project` | Import Eclipse CDT `.project` |
 | `HT32: Build` | Run build task |
@@ -507,6 +570,8 @@ After conversion or project creation:
 | `HT32: Generate Build & Debug Config` | Regenerate `tasks.json` and `launch.json` |
 
 ---
+
+<br>
 
 ## Supported Devices
 
@@ -525,6 +590,8 @@ Flash/download support (via bundled OpenOCD + HLM loaders) is available for ~100
 
 ---
 
+<br>
+
 ## Bundled Assets
 
 | Asset | Description |
@@ -536,11 +603,15 @@ Flash/download support (via bundled OpenOCD + HLM loaders) is available for ~100
 
 ---
 
+<br>
+
 ## Third-Party Licenses
 
 See `THIRD_PARTY_LICENSES.md` for license information for bundled components (OpenOCD, GNU Make, HT32 DFP, fast-xml-parser).
 
 ---
+
+<br>
 
 ## License
 
