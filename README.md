@@ -121,6 +121,7 @@ Right-click menu:
 | Group | Add Files to Group, Remove Group |
 | File | Remove from Group, Delete File |
 
+<img src="media/12.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;"><br>
 ---
 
 <br>
