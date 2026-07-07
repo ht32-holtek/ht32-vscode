@@ -224,9 +224,10 @@ MyProject/                 ← 使用者命名的專案資料夾
 - `startup_xxx_gcc.s`（從 Keil startup 轉換，放在共用 `GNU_ARM/`）
 - `compile_commands.json` / `tasks.json` / `launch.json`
 
-**單一 `.uvprojx`** — 共用檔輸出至 `HT32_VSCode/GNU_ARM/`；Makefile 與中繼資料輸出至 `HT32_VSCode/Project/`
+**`.uvprojx` 單一專案** — 共用檔輸出至 `HT32_VSCode/GNU_ARM/`；Makefile 與中繼資料輸出至 `HT32_VSCode/Project/`
 
 **`.uvmpw` 多專案** — 每個子專案各一個目錄，目錄名稱取自 `.uvprojx` 檔名（例如 `Project_IAP.uvprojx` + `Project_AP.uvprojx`）：
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/7.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ```
 <ProjectRoot>/
@@ -245,11 +246,13 @@ MyProject/                 ← 使用者命名的專案資料夾
         └── *.json
 ```
 
+---
+
+<br>
+
 **轉換警告**（如 Keil 預編譯 `.lib` 無法用於 GCC 工具鏈）會顯示在 VS Code **Problems** 面板中。
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
-
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/7.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -260,9 +263,7 @@ MyProject/                 ← 使用者命名的專案資料夾
 1. HT32 面板 → **Convert HT32-IDE Project**
 2. 選取一個或多個包含 `.project` / `.cproject` 的**專案資料夾**（**支援多選**）
 
-每個選取的資料夾各自轉換為 `HT32_VSCode/` 內的獨立目錄，共用 `HT32_VSCode/GNU_ARM/` 存放 startup、linker script 與自動產生的 C 檔案。
-
-> **轉換警告**（如缺少檔案等）會顯示在 VS Code **Problems** 面板中。
+每個選取的資料夾各自轉換為 `HT32_VSCode/` 內的獨立目錄，共用 `HT32_VSCode/GNU_ARM/` 存放 startup、linker script 與自動產生的 C 檔案。產生的資料夾結構與 TreeView 組織方式與匯入 uVision 專案相同。
 
 ---
 
@@ -277,7 +278,7 @@ MyProject/                 ← 使用者命名的專案資料夾
 
 也可在「專案設定」中設定 **Post-Build** 命令，Build 成功後自動執行（例如 CRC 計算）。執行時的工作目錄為 `${workspaceFolder}`（即 `HT32_VSCode/`，VS Code workspace 根目錄），子專案目錄如 `Project_xxx/build/` 均相對此路徑。
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/9.jpg" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 

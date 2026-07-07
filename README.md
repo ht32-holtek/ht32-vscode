@@ -223,9 +223,10 @@ For `.uvmpw`, **all sub-projects are converted at once**, each into its own fold
 - `startup_xxx_gcc.s` (converted from Keil startup, shared in `GNU_ARM/`)
 - `compile_commands.json` / `tasks.json` / `launch.json`
 
-**Single `.uvprojx`** — output to `HT32_VSCode/GNU_ARM/` (shared files) + `HT32_VSCode/Project/` (Makefile & metadata)
+**`.uvprojx` single-project** — output to `HT32_VSCode/GNU_ARM/` (shared files) + `HT32_VSCode/Project/` (Makefile & metadata)
 
 **`.uvmpw` multi-project** — one folder per sub-project, named from the `.uvprojx` filename (e.g. `Project_IAP.uvprojx` + `Project_AP.uvprojx`):
+<img src="media/7.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ```
 <ProjectRoot>/
@@ -245,11 +246,13 @@ For `.uvmpw`, **all sub-projects are converted at once**, each into its own fold
         └── *.json
 ```
 
+---
+
+<br>
+
 Conversion warnings (e.g. prebuilt `.lib` files that cannot be used with GCC) appear in the VS Code **Problems** panel.
 
 <img src="media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
-
-<img src="media/7.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -260,7 +263,7 @@ Conversion warnings (e.g. prebuilt `.lib` files that cannot be used with GCC) ap
 1. Click **Convert HT32-IDE Project** in the HT32 panel
 2. Select one or more project folders containing `.project` / `.cproject` (Eclipse CDT format) — **multiple folders can be selected at once**
 
-Each selected folder is converted into its own folder inside `HT32_VSCode/`, sharing a common `HT32_VSCode/GNU_ARM/` for startup, linker script, and generated C files. Conversion warnings appear in the VS Code **Problems** panel.
+Each selected folder is converted into its own folder inside `HT32_VSCode/`, sharing a common `HT32_VSCode/GNU_ARM/` for startup, linker script, and generated C files. The generated folder structure and TreeView organization are identical to a uVision conversion.
 
 ---
 
@@ -269,13 +272,13 @@ Each selected folder is converted into its own folder inside `HT32_VSCode/`, sha
 ## Build
 
 - Click **Build** in the HT32 toolbar
-- Or press **Ctrl+Shift+B** to access VS Code tasks (Build, Build All, Clean, Download)
+- Or press **Ctrl+Shift+B** to run the default build task directly
 
 <img src="media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 A **Post-Build** command can be configured in Settings to run automatically after a successful build (e.g. CRC calculation). The working directory is `${workspaceFolder}` (= `HT32_VSCode/`, the VS Code workspace root). Sub-project folders such as `Project_xxx/build/` are referenced relative to this root.
 
-<img src="media/9.png" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/9.jpg" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
