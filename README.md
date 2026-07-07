@@ -117,7 +117,7 @@ Right-click menu:
 | Target | Actions |
 |--------|---------|
 | Tree root (`.ht32vs`) | Rename Project File, Add Project |
-| Sub-project node | Add Group, Remove Project from Workspace |
+| Sub-project node | Add Group, Remove Project |
 | Group | Add Files to Group, Remove Group |
 | File | Remove from Group, Delete File |
 
@@ -135,7 +135,7 @@ Every HT32 project is associated with a **`.ht32vs` project file** (stored insid
 | Method | Description |
 |--------|-------------|
 | **Double-click `.ht32vs`** | Double-click a `.ht32vs` file in Explorer — opens the project directly |
-| **Open Project** | Browse for a `.ht32vs` file via the `···` menu or `HT32: Open Project` command |
+| **Open Project** | Browse for a `.ht32vs` file via the welcome screen **Open** button, the `···` menu, or `HT32: Open Project` command |
 | **Recent Projects** | Click any entry in the Recent Projects list (shown when no project is open) |
 
 ### Managing sub-projects
@@ -144,42 +144,31 @@ A `.ht32vs` file can list multiple sub-project folders (e.g. `Project_IAP` and `
 
 | Action | How |
 |--------|-----|
-| **Add Project to Workspace** | Right-click the root node → **Add Project to Workspace** — select from available folders in the same location |
-| **Remove Project from Workspace** | Right-click a project node → **Remove Project from Workspace** — removes it from the list (files on disk are not deleted). Not available when only one project remains. |
+| **Add Project** | Right-click the root node → **Add Project** — select from available folders in the same location |
+| **Remove&nbsp;Project** | Right-click a project node → **Remove Project** — removes it from the list (files on disk are not deleted). Not available when only one project remains. |
 
 ### Renaming a project
 
 Right-click the root node in the Project Tree → **Rename Project File**. This renames the `.ht32vs` file on disk and updates the Recent Projects list automatically.
 
-> Rename is only available when a `.ht32vs` file is active (not in Open Folder mode).
 
 ---
 
 <br>
 
-## Getting Started
-
-### Create a New Project
+## Create a New Project
 
 > Requires HT32 FWLib downloaded from the Holtek website.
 
-Click **Create Project** from the `···` menu (or from the welcome screen when no project is open). The wizard opens as a panel with three sections:
+1. HT32 panel → **Create Project**
+2. Follow the wizard steps:
 
-**① FWLib** — Enter or browse to the HT32 FWLib root folder. Previously used paths appear as a Recent list for quick selection.
-
-**② MCU** — Choose the target MCU from the dropdown (populated automatically based on the detected FWLib series).
-
-**③ Project**
-
-| Field | Description |
-|-------|-------------|
-| Output Type | **Executable (.elf)** or **Library (.a)** |
-| Project Name | Used as the ELF/HEX filename and sub-project folder name |
-| Project Folder | Parent folder where the project will be created |
-
-Click **Generate** to create the project. If a project is currently open and the target folder is the same workspace, you will be asked whether to add the new project to it.
-
-> **Running while a project is open:** Create Project can be launched from the `···` menu at any time — it does not require closing the current project first.
+| Step | Content |
+|------|---------|
+| ① | Select the **HT32 FWLib root folder** |
+| ② | Select the **MCU model** |
+| ③ | Select output type: **Executable (.elf)** or **Library (.a)** |
+| ④ | Enter the **project name** and output folder |
 
 <img src="media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
@@ -221,7 +210,7 @@ To add a second project to the same workspace folder, run **Create Project** aga
 
 <br>
 
-### Convert a Keil uVision Project
+## Convert a Keil uVision Project
 
 1. Click **Convert uVision Project** in the HT32 panel
 2. Select the `.uvprojx` (single project) or `.uvmpw` (multi-project workspace) file
@@ -230,7 +219,7 @@ For `.uvmpw`, **all sub-projects are converted at once**, each into its own fold
 
 **Auto-generated:**
 - `Makefile` (MCU, compiler flags, source files)
-- Linker script (shared in `GNU_ARM/`): `linker_script.ld` if Keil scatter file present; otherwise taken directly from FWLib (`linker.ld` for standard series, `<chip>_FLASH.ld` for 49x series)
+- Linker script (shared in `GNU_ARM/`): if Keil scatter file present, converted to `<scatter_name>.ld` (original filename with `.ld` extension); otherwise taken directly from FWLib (`linker.ld` for standard series, `<chip>_FLASH.ld` for 49x series)
 - `startup_xxx_gcc.s` (converted from Keil startup, shared in `GNU_ARM/`)
 - `compile_commands.json` / `tasks.json` / `launch.json`
 
@@ -256,26 +245,17 @@ For `.uvmpw`, **all sub-projects are converted at once**, each into its own fold
         └── *.json
 ```
 
-> **IAP path convention — embedding one project's binary into another:**
-> `.incbin` in GCC assembly or C inline `asm(".incbin ...")` resolves paths relative to the **make working directory** (`HT32_VSCode/Project_xxx/`), not the source file location.
-> ```c
-> /* in iap.c — path is relative to HT32_VSCode/Project_IAP/ */
-> asm(".incbin \"../Project_AP/build/AP.bin\"");
-> ```
-> `..` navigates from `Project_IAP/` up to `HT32_VSCode/`, then into `Project_AP/build/`.
-> Note: Keil `INCBIN` in `.s` files uses the `.s` file's directory as the base — the paths differ.
-
 Conversion warnings (e.g. prebuilt `.lib` files that cannot be used with GCC) appear in the VS Code **Problems** panel.
 
 <img src="media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-<img src="media/7.png" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/7.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
 <br>
 
-### Convert an HT32-IDE Project
+## Convert an HT32-IDE Project
 
 1. Click **Convert HT32-IDE Project** in the HT32 panel
 2. Select one or more project folders containing `.project` / `.cproject` (Eclipse CDT format) — **multiple folders can be selected at once**
@@ -539,7 +519,7 @@ After conversion or project creation:
     │   └── compile_commands.json ← merged for clangd
     ├── GNU_ARM/                  ← shared generated GCC support files
     │   ├── startup_xxx_gcc.s
-    │   ├── linker_script.ld      ← from Keil scatter; or linker.ld / <chip>_FLASH.ld from FWLib
+    │   ├── <scatter_name>.ld     ← from Keil scatter; or linker.ld / <chip>_FLASH.ld from FWLib
     │   ├── ht32_op.c             ← uVision only
     │   ├── syscalls.c
     │   └── ht32_stack_analysis.c
