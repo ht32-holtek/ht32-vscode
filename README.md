@@ -16,8 +16,8 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 | **Convert uVision** | Import Keil `.uvprojx` / `.uvmpw` projects — Makefile, linker script, clangd config auto-generated |
 | **Convert HT32-IDE** | Import one or more Eclipse CDT `.project`/`.cproject` project folders (multi-select supported) |
 | **Build / Clean** | One-click or toolbar buttons; compound post-build task support |
-| **Download (Flash)** | Flash firmware via bundled OpenOCD + e-Link32 Pro/Lite |
 | **Debug** | Cortex-Debug + bundled OpenOCD; Flash & Debug or Attach mode |
+| **Download** | Download firmware via bundled OpenOCD + e-Link32 Pro/Lite |
 | **Project Settings** | WebView panel for compiler flags, debug interface, post-build commands |
 | **Project File Tree** | Source groups view with add/remove files and groups |
 | **Configuration Wizard** | Visual editor for HT32 config files (`conf.h`, `usbdconf.h`, `startup.s`) — Keil-compatible wizard syntax |
@@ -92,9 +92,9 @@ After installation, the **HT32 icon** appears in the Activity Bar. Click it to o
 | Build | Compile (runs make) |
 | Debug | Start Cortex-Debug session via OpenOCD (Flash & Debug or Attach) |
 | Clean | Delete the `build/` output directory |
-| Download | Flash firmware without starting a debug session |
-| Settings | Open HT32 Settings WebView |
-| Generate Config | Regenerate `tasks.json` and `launch.json` |
+| Download | Download firmware without starting a debug session |
+| Settings | Open Project Settings |
+| Generate Build & Debug Config | Regenerate `tasks.json` and `launch.json` |
 
 The **`···` (More Actions)** menu also contains:
 
@@ -276,9 +276,11 @@ Each selected folder is converted into its own folder inside `HT32_VSCode/`, sha
 
 <img src="media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
+<br>
+
 A **Post-Build** command can be configured in Settings to run automatically after a successful build (e.g. CRC calculation). The working directory is `${workspaceFolder}` (= `HT32_VSCode/`, the VS Code workspace root). Sub-project folders such as `Project_xxx/build/` are referenced relative to this root.
 
-<img src="media/9.jpg" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/9.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -293,7 +295,7 @@ A **Post-Build** command can be configured in Settings to run automatically afte
 
 <br>
 
-## Flash Firmware
+## Download Firmware
 
 > Requires Holtek e-Link32 Pro or e-Link32 Lite connected.
 
@@ -303,7 +305,9 @@ A **Post-Build** command can be configured in Settings to run automatically afte
 
 <img src="media/10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-### Flash Settings (configured in HT32 Settings)
+### Download Settings
+
+Open **Settings** (toolbar) → **Debugger** tab:
 
 | Setting | Options |
 |---------|---------|
@@ -329,9 +333,9 @@ Use this when the target board is already running and you don't need to reflash.
 
 1. Confirm the target board is powered and running
 2. Press **F5** or open Run and Debug (**Ctrl+Shift+D**)
-3. Select **HT32 OpenOCD Attach** from the dropdown, then press ▶
+3. Select **HT32 OpenOCD Attach** from the dropdown
 
-> Attach does not compile or flash — it connects directly via OpenOCD and halts the CPU.
+> Attach does not compile or flash — it connects directly via OpenOCD to the running target without resetting it.
 
 | Mode | Description |
 |------|-------------|
@@ -346,43 +350,32 @@ Use this when the target board is already running and you don't need to reflash.
 
 ## Stack Usage Analysis
 
-The **HT32 Stack Usage Analysis** panel (in the HT32 sidebar view) updates automatically every time the debugger halts (breakpoint, step, manual pause). It is the GCC/OpenOCD equivalent of Keil's stack analysis window.
+The **HT32 Stack Usage Analysis** panel (in the Run & Debug view) updates automatically every time the debugger halts (breakpoint, step, manual pause). It is the GCC/OpenOCD equivalent of Keil's stack analysis window.
 
 ### Panel rows
 
 | Row | Description |
 |-----|-------------|
-| **System Mode** | `Normal` / `AP Mode` / `IAP Mode` — detected automatically from the ELF |
-| **Flash Start Addr** | Where this image links in flash (non-zero for AP images) |
-| **Stack Top Addr (Start)** | `__StackTop` — initial MSP, top of RAM. Shown with ⚠ in AP/IAP mode |
-| **Stack Bottom Addr (End/Limit)** | `__HT_check_sp` — bottom of the `.stack` section |
-| **Stack Size** | `__StackTop − __HT_check_sp` |
-| **Current Usage** | Bytes used since last halt |
-| **Peak Usage** | All-time high (paint watermark when enabled, otherwise session peak) |
-| **Peak Addr** | Address of the peak watermark / lowest SP seen this session |
-
-### IAP / AP mode detection
-
-The extension reads the ELF's PT_LOAD segments to detect the project type automatically — no configuration required:
-
-| Detected mode | Condition |
-|---------------|-----------|
-| **AP Mode** | ELF flash start address > MCU flash base (image links at a non-zero flash offset) |
-| **IAP Mode** | ELF flash start == MCU flash base, but binary footprint < 50 % of MCU total flash |
-| **Normal** | Everything else |
+| **Target** | ELF filename (output name) |
+| **Stack Top Addr (Start)** | Top of the stack region (highest address) |
+| **Stack Bottom Addr (End/Limit)** | Bottom of the stack region (stack limit) |
+| **Stack Size** | Total stack size |
+| **Current Usage** | Stack bytes in use at the last debugger halt |
+| **Peak Usage** | Highest stack usage recorded (requires watermark setup — see below) |
+| **Peak Addr** | Address where peak usage was recorded |
 
 ### Enabling peak (watermark) tracking
 
-By default only current usage and session peak are shown. To enable all-time peak tracking:
+By default, **Peak Usage** shows a reminder to enable watermark tracking. To display actual peak values:
 
-1. Add `-DHTCFG_STACK_USAGE_ANALYSIS=1` to **Extra C Flags** in HT32 Settings → Compiler tab
-2. Call `StackUsageAnalysisInit()` once at startup (before the RTOS scheduler or main loop)
+1. Ensure `HTCFG_STACK_USAGE_ANALYSIS` is defined as `1` (e.g. in your project configuration header)
+2. Call `StackUsageAnalysisInit(0)` once at startup (before the RTOS scheduler or main loop)
 
 ```c
 #include "ht32_stack_analysis.h"
 
 int main(void) {
-    StackUsageAnalysisInit();   // paints stack with sentinel pattern
+    StackUsageAnalysisInit(0);   // fills unused stack with a known pattern for watermark tracking
     // ... rest of init
 }
 ```
@@ -393,7 +386,7 @@ Without both steps the **Peak Usage** row shows a reminder instead of a value.
 
 <br>
 
-## HT32 Settings
+## Project Settings
 
 Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. Settings auto-save 3 seconds after any change and are stored in `HT32_VSCode/Project/project.settings.json` (or `HT32_VSCode/Project_xxx/project.settings.json` for multi-project).
 
@@ -401,21 +394,23 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 
 | Setting | Options |
 |---------|---------|
-| Output Name | Override the output filename (ELF/HEX) |
+| Output Filename | Custom output filename for the generated `.elf` / `.a` (leave empty to keep the converted name) |
 | Optimization | `-O0` / `-O1` / `-O2` / `-O3` / `-Os` (default) / `-Og` |
 | Debug Info | `-g3` (default, full debug) / `-g` (standard) / `-g1` (line numbers only) / `-g0` (none, for release) |
 | Float ABI | `soft` (M0/M3) / `softfp` / `hard` (M4F) |
 | FPU | `none` / `fpv4-sp-d16` (M4F) / `fpv5-sp-d16` (M7) / `fpv5-d16` (M7) |
-| C Runtime | `nano` (newlib-nano) / `nosys` — can combine both |
+| C Runtime Library | `nano` (newlib-nano) / `nosys` — can combine both |
 | printf float | Enable floating-point printf (`-u _printf_float`) |
 | scanf float | Enable floating-point scanf (`-u _scanf_float`) |
 | LTO | Enable `-flto` |
-| Extra Lib Names | Library names (`-lName`) with optional search path (`-L"dir"`) |
-| Extra Include Paths | Additional `-I` paths appended to CFLAGS/ASFLAGS |
+| Libraries (-l) | Library names to link (`-lName`) |
+| Search Paths (-L) | Library search directories (`-L"dir"`) |
+| Include Paths | All `-I` paths written to `includes.list` — auto-populated at conversion; add extra paths here |
 | Extra CFLAGS | Additional compiler flags, e.g. `-DDEBUG` |
 | Extra LDFLAGS | Additional linker flags |
 
-<img src="media/15.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/15-1.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="media/15-2.png" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -445,7 +440,7 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 
 | Setting | Description |
 |---------|-------------|
-| Post-Build | Command to run after a successful build (working dir: `${workspaceFolder}` = `HT32_VSCode/`) |
+| Post-Build Command | Command to run after a successful build (working dir: `${workspaceFolder}` = `HT32_VSCode/`) |
 | GCC Path | `arm-none-eabi-gcc` path (blank = auto-detect) — machine-wide |
 | OpenOCD Path | OpenOCD path (blank = use bundled OpenOCD) — machine-wide |
 
@@ -547,10 +542,10 @@ After conversion or project creation:
 | `HT32: Convert uVision Project` | Import Keil `.uvprojx` / `.uvmpw` |
 | `HT32: Convert HT32-IDE Project` | Import Eclipse CDT `.project` |
 | `HT32: Build` | Run build task |
-| `HT32: Download` | Flash firmware |
+| `HT32: Download` | Download firmware |
 | `HT32: Debug` | Start debug session |
 | `HT32: Clean` | Clean build output |
-| `HT32: Open Settings` | Open HT32 Settings WebView |
+| `HT32: Open Settings` | Open Project Settings |
 | `HT32: Generate Build & Debug Config` | Regenerate `tasks.json` and `launch.json` |
 
 ---
