@@ -204,7 +204,7 @@ MyProject/                 ← user-named project folder
             └── ht32_stack_analysis.c
 ```
 
-To add a second project to the same workspace folder, run **Create Project** again while the workspace is open. When prompted, select **Yes** to add the new project to the currently open workspace. Each project is fully self-contained under its own `<projectName>/` folder.
+To add a second project, run **Create Project** again and select the **same parent folder** as the existing project. When prompted, select **Yes** to merge into the existing `.ht32vs` project file. Each project is fully self-contained under its own `<projectName>/` folder. Projects located in different folders cannot be merged.
 
 ---
 
