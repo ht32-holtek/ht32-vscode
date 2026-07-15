@@ -365,6 +365,9 @@ MyProject/                 ← 使用者命名的專案資料夾
 | **Peak Usage** | 最高堆疊使用量（需啟用 watermark 追蹤，見下方說明） |
 | **Peak Addr** | 最高使用量發生的記憶體位址 |
 
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/21.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
+
 ### 啟用 Peak（watermark）追蹤
 
 預設 **Peak Usage** 欄位顯示提示訊息。若需顯示實際峰值：

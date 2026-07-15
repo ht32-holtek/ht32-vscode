@@ -364,6 +364,8 @@ The **HT32 Stack Usage Analysis** panel (in the Run & Debug view) updates automa
 | **Peak Usage** | Highest stack usage recorded (requires watermark setup — see below) |
 | **Peak Addr** | Address where peak usage was recorded |
 
+<img src="media/21.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
 ### Enabling peak (watermark) tracking
 
 By default, **Peak Usage** shows a reminder to enable watermark tracking. To display actual peak values:
