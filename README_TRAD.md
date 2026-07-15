@@ -1,4 +1,4 @@
-﻿[English](http://mcutest.holtek.com.tw/ht32-vscode/) | [中文使用手冊](#holtek-ht32-vs-code-extension)
+﻿[English](https://ht32-holtek.github.io/ht32-vscode/) | [中文使用手冊](https://ht32-holtek.github.io/ht32-vscode/README_TRAD)
 
 # Holtek HT32 VS Code Extension
 
@@ -467,13 +467,15 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 ### 開啟方式
 
 **方法一 — 編輯器標題按鈕（推薦）：**  
-開啟支援的檔案（`.h`、`.c`、`.s`）後，點擊編輯器右上角的 **Preview** 按鈕即可切換為 Wizard 視圖；點擊 **Go to File** 切換回文字編輯。
+開啟支援的檔案（`.h`、`.c`、`.s`）後，點擊編輯器右上角的 **Open in Holtek Configuration Wizard** 按鈕即可切換為 Wizard 視圖；點擊 **Reopen as source file** 切換回文字編輯。
+
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/20.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 **方法二 — 右鍵選單：**  
-在 Explorer 中對 `.h`、`.c`、`.s` 檔案按右鍵 → **Open in Holtek HT32 Configuration Wizard**
+在左側 Explorer 面板中對 `.h`、`.c`、`.s` 檔案按右鍵 → **Open in Holtek Configuration Wizard**
 
 **方法三 — 命令面板：**  
-`Ctrl+Shift+P` → **HT32: Open in Holtek HT32 Configuration Wizard**
+`Ctrl+Shift+P` → **HT32: Open in Holtek Configuration Wizard**
 
 ### 控制項類型
 
@@ -491,46 +493,11 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 
 ## IntelliSense（clangd）
 
-匯入或建立專案後，開啟專案時自動產生：
-- `.clangd`（project root，`HT32_VSCode/` 的上層）— include 路徑、編譯旗標
-- `.clangd`（FWLib root）— 最小設定（僅 `UnusedIncludes: None`），避免 clangd 在 FWLib 內部檔案（`utilities/`、`library/` 等）顯示 unused-include 警告
-- `.vscode/compile_commands.json` — 合併版，供 clangd 使用
+匯入或建立專案後，開啟專案時自動產生 `.clangd` 與 `.vscode/compile_commands.json`，提供完整的 IntelliSense 支援。
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/13.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/14.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-建議安裝 **clangd** 擴充功能（`llvm-vs-code-extensions.vscode-clangd`）並停用內建 C/C++ IntelliSense 以避免衝突。
-
----
-
-<br>
-
-## 輸出結構
-
-轉換或建立專案後：
-
-```
-<ProjectRoot>/
-├── MDK_ARMv5/（或 src/）          ← 原始 Keil 專案 / 使用者原始碼
-├── .clangd                       ← 開啟專案時自動產生（clangd 設定）
-└── HT32_VSCode/                  ← VS Code workspace root
-    ├── .vscode/
-    │   ├── tasks.json
-    │   ├── launch.json
-    │   └── compile_commands.json ← 合併版，供 clangd 使用
-    ├── GNU_ARM/                  ← 共用自動產生的 GCC 支援檔案
-    │   ├── startup_xxx_gcc.s
-    │   ├── <scatter_name>.ld     ← 來自 Keil scatter；或 FWLib 的 linker.ld / <chip>_FLASH.ld
-    │   ├── ht32_op.c             ← 僅 uVision 轉換
-    │   ├── syscalls.c
-    │   └── ht32_stack_analysis.c
-    └── Project/                  ← Makefile 與建置中繼資料（多專案為 Project_xxx/）
-        ├── Makefile
-        ├── sources.list
-        ├── project.meta.json
-        ├── project.settings.json
-        └── build.meta.json
-```
 
 ---
 
@@ -550,6 +517,10 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 | `HT32: Clean` | 清除編譯輸出 |
 | `HT32: Open Settings` | 開啟專案設定 |
 | `HT32: Generate Build & Debug Config` | 重新產生 `tasks.json` 與 `launch.json` |
+| `HT32: Regenerate compile_commands.json` | 重新產生供 clangd 使用的 `compile_commands.json` |
+| `HT32: Close Project` | 關閉目前載入的專案 |
+| `HT32: Clear Recent Projects` | 清除最近開啟清單 |
+| `HT32: Refresh Stack Usage` | 手動刷新 Stack Usage Analysis 面板 |
 
 ---
 
@@ -562,26 +533,12 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 | 核心 | 系列 | 範例 |
 |------|------|------|
 | Cortex-M0+ | HT32F5xxxx | HT32F52352, HT32F52341, HT32F0008 |
-| Cortex-M0+ | HT32F5xxxx（延伸） | HT32F61352, HT32F62030, HT32F67232 |
 | Cortex-M3 | HT32F1xxxx | HT32F12345, HT32F12366 |
 | Cortex-M4 | HT32F4xxxx | HT32F40316, HT32F45369 |
 | Cortex-M4 | HT32F490x / 491x / 493x | HT32F49163, HT32F49395 |
 | Cortex-M33 | HT32F675xx | HT32F67575, HT32F67595 |
 
-燒錄支援（透過內建 OpenOCD + HLM loader）約涵蓋 100 個裝置。無 MCU cfg 檔的裝置仍可使用自訂 OpenOCD 設定進行建置與除錯。
-
----
-
-<br>
-
-## 內建資源
-
-| 資源 | 說明 |
-|------|------|
-| `openocd/` | OpenOCD Windows x64 + 約 90 個 HT32 MCU `.cfg` 設定檔 + HLM flash loader |
-| `bin/win32-x64/make.exe` | GNU Make Windows x64 |
-| `dfp/Holtek/HT32_DFP/` | CMSIS DFP（多版本）— 周邊暫存器檢視用 SVD 檔案 |
-| `templates/GNU_ARM/` | Startup `.s`、`syscalls.c`、`ht32_stack_analysis.c` 範本（linker script 於轉換時從 FWLib 取得） |
+燒錄支援（透過內建 OpenOCD + HLM loader）約涵蓋 100 個裝置。
 
 ---
 

@@ -1,4 +1,4 @@
-﻿[中文使用手冊](README_TRAD.md) | [English](#holtek-ht32-vs-code-extension)
+﻿[中文使用手冊](https://ht32-holtek.github.io/ht32-vscode/README_TRAD) | [English](https://ht32-holtek.github.io/ht32-vscode/)
 
 # Holtek HT32 VS Code Extension
 
@@ -465,11 +465,11 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs.
 
 **How to open:**
 
-- **Editor title button (recommended):** Open a supported `.h` / `.c` / `.s` file, then click the **Preview** button in the editor title bar. Click **Go to File** to switch back to text editing.
+- **Editor title button (recommended):** Open a supported `.h` / `.c` / `.s` file, then click the **Open in Holtek Configuration Wizard** button in the editor title bar. Click **Reopen as source file** to switch back to text editing.
 
 <img src="media/20.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-- **Right-click menu:** Right-click the file in Explorer → **Open in Holtek Configuration Wizard**
+- **Right-click menu:** Right-click the file in the VS Code Explorer panel → **Open in Holtek Configuration Wizard**
 - **Command Palette:** `Ctrl+Shift+P` → **HT32: Open in Holtek Configuration Wizard**
 
 **Control types:**
@@ -490,47 +490,11 @@ Changes are written back to the source file immediately; only the modified value
 
 ## IntelliSense (clangd)
 
-After conversion or project creation, the extension auto-generates:
-
-- `.clangd` (project root, one level above `HT32_VSCode/`) — generated automatically on project open
-- `.clangd` (FWLib root) — also generated on project open (minimal, `UnusedIncludes: None` only); ensures clangd does not show warnings in FWLib internal files (e.g. `utilities/`, `library/`)
-- `.vscode/compile_commands.json` — merged for clangd
+After conversion or project creation, the extension auto-generates `.clangd` and `.vscode/compile_commands.json` for full IntelliSense support.
 
 <img src="media/13.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 <img src="media/14.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-Recommended: install the **clangd** extension (`llvm-vs-code-extensions.vscode-clangd`) and disable the built-in C/C++ IntelliSense to avoid conflicts.
-
----
-
-<br>
-
-## Output Structure
-
-After conversion or project creation:
-
-```
-<ProjectRoot>/
-├── MDK_ARMv5/ (or src/)          ← original Keil project / user sources
-├── .clangd                       ← auto-generated on project open (clangd config)
-└── HT32_VSCode/                  ← VS Code workspace root
-    ├── .vscode/
-    │   ├── tasks.json
-    │   ├── launch.json
-    │   └── compile_commands.json ← merged for clangd
-    ├── GNU_ARM/                  ← shared generated GCC support files
-    │   ├── startup_xxx_gcc.s
-    │   ├── <scatter_name>.ld     ← from Keil scatter; or linker.ld / <chip>_FLASH.ld from FWLib
-    │   ├── ht32_op.c             ← uVision only
-    │   ├── syscalls.c
-    │   └── ht32_stack_analysis.c
-    └── Project/                  ← Makefile & build metadata (Project_xxx/ for multi-project)
-        ├── Makefile
-        ├── sources.list
-        ├── project.meta.json
-        ├── project.settings.json
-        └── build.meta.json
-```
 
 ---
 
@@ -550,6 +514,10 @@ After conversion or project creation:
 | `HT32: Clean` | Clean build output |
 | `HT32: Open Settings` | Open Project Settings |
 | `HT32: Generate Build & Debug Config` | Regenerate `tasks.json` and `launch.json` |
+| `HT32: Regenerate compile_commands.json` | Regenerate `compile_commands.json` for clangd |
+| `HT32: Close Project` | Close the currently loaded project |
+| `HT32: Clear Recent Projects` | Clear the Recent Projects list |
+| `HT32: Refresh Stack Usage` | Manually refresh the Stack Usage Analysis panel |
 
 ---
 
@@ -562,26 +530,12 @@ After conversion or project creation:
 | Core | Series | Examples |
 |------|--------|---------|
 | Cortex-M0+ | HT32F5xxxx | HT32F52352, HT32F52341, HT32F0008 |
-| Cortex-M0+ | HT32F5xxxx (extended) | HT32F61352, HT32F62030, HT32F67232 |
 | Cortex-M3 | HT32F1xxxx | HT32F12345, HT32F12366 |
 | Cortex-M4 | HT32F4xxxx | HT32F40316, HT32F45369 |
 | Cortex-M4 | HT32F490x / 491x / 493x | HT32F49163, HT32F49395 |
 | Cortex-M33 | HT32F675xx | HT32F67575, HT32F67595 |
 
-Flash/download support (via bundled OpenOCD + HLM loaders) is available for ~100 devices. Devices without an MCU cfg file can still be built and debugged with a custom OpenOCD configuration.
-
----
-
-<br>
-
-## Bundled Assets
-
-| Asset | Description |
-|-------|-------------|
-| `openocd/` | OpenOCD Windows x64 + ~90 HT32 MCU `.cfg` files + HLM flash loaders |
-| `bin/win32-x64/make.exe` | GNU Make Windows x64 |
-| `dfp/Holtek/HT32_DFP/` | CMSIS DFP (multiple versions) — SVD files for peripheral register view |
-| `templates/GNU_ARM/` | Startup `.s`, `syscalls.c`, `ht32_stack_analysis.c` templates (linker script is sourced from FWLib at conversion time) |
+Flash/download support (via bundled OpenOCD + HLM loaders) is available for ~100 devices.
 
 ---
 
