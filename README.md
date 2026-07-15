@@ -388,7 +388,7 @@ Without both steps the **Peak Usage** row shows a reminder instead of a value.
 
 ## Project Settings
 
-Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. Settings auto-save 3 seconds after any change and are stored in `HT32_VSCode/Project/project.settings.json` (or `HT32_VSCode/Project_xxx/project.settings.json` for multi-project).
+Open via the **Settings** button in the HT32 toolbar. The panel has three tabs.
 
 ### Compiler Tab
 
@@ -444,7 +444,7 @@ Open via the **Settings** button in the HT32 toolbar. The panel has three tabs. 
 | GCC Path | `arm-none-eabi-gcc` path (blank = auto-detect) — machine-wide |
 | OpenOCD Path | OpenOCD path (blank = use bundled OpenOCD) — machine-wide |
 
-Toolchain paths are stored in VS Code User Settings and shared across all projects.
+> Toolchain paths (GCC / OpenOCD) are stored in VS Code User Settings and **shared across all projects** — shown only in the first project's Build tab.
 
 ---
 
@@ -452,7 +452,7 @@ Toolchain paths are stored in VS Code User Settings and shared across all projec
 
 ## Configuration Wizard
 
-The **Holtek Configuration Wizard** extension (installed automatically) provides a visual editor for HT32 firmware configuration files, compatible with Keil MDK Configuration Wizard syntax.
+**Holtek HT32 Configuration Wizard** is a dependency extension, installed automatically alongside the Holtek HT32 VS Code Extension. It provides a visual editor for HT32 firmware configuration files, compatible with Keil MDK Configuration Wizard syntax.
 
 **Supported files:**
 
@@ -466,6 +466,9 @@ The **Holtek Configuration Wizard** extension (installed automatically) provides
 **How to open:**
 
 - **Editor title button (recommended):** Open a supported `.h` / `.c` / `.s` file, then click the **Preview** button in the editor title bar. Click **Go to File** to switch back to text editing.
+
+<img src="media/20.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
 - **Right-click menu:** Right-click the file in Explorer → **Open in Holtek Configuration Wizard**
 - **Command Palette:** `Ctrl+Shift+P` → **HT32: Open in Holtek Configuration Wizard**
 

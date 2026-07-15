@@ -445,14 +445,13 @@ HT32 工具列點 **Settings** 開啟設定面板，面板分為三個分頁：
 | GCC Path | `arm-none-eabi-gcc` 路徑（空白 = 自動偵測或 winget 安裝） |
 | OpenOCD Path | OpenOCD 路徑（空白 = 使用 bundled OpenOCD） |
 
-> 工具鏈路徑（GCC / OpenOCD）儲存於 VS Code 機器設定，**所有專案共用**，僅顯示於第一個專案的 Build 分頁。  
-> 專案設定儲存於 `HT32_VSCode/Project/project.settings.json`（或 `HT32_VSCode/Project_xxx/project.settings.json`），3 秒後自動儲存。
+> 工具鏈路徑（GCC / OpenOCD）儲存於 VS Code 機器設定，**所有專案共用**，僅顯示於第一個專案的 Build 分頁。
 
 ---
 
 <br>
 
-## Configuration Wizard
+## 設定精靈（Configuration Wizard）
 
 **Holtek HT32 Configuration Wizard** 為相依擴充功能，安裝 Holtek HT32 VS Code Extension 時會自動一併安裝，提供 HT32 韌體設定檔的視覺化圖形編輯介面，相容 Keil MDK Configuration Wizard 語法。
 
