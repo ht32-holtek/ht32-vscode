@@ -210,7 +210,7 @@ MyProject/                 ← 使用者命名的專案資料夾
 **NOTE:**
 **工作區信任** — 若 VS Code 以受限模式開啟資料夾，擴充功能將顯示通知：*「This workspace is in Restricted Mode. Please trust the workspace to enable all features.」*，請點選 **Trust Workspace** 以啟用編譯與除錯功能。
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/22.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/22.jpg" width="400" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 ---
 
 <br>

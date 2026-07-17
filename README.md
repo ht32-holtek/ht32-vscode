@@ -209,6 +209,8 @@ To add a second project, run **Create Project** again and select the **same pare
 
 > **Workspace Trust** — If VS Code opens the folder in Restricted Mode, the extension will show a notification: *"This workspace is in Restricted Mode. Please trust the workspace to enable all features."* Click **Trust Workspace** to enable build and debug.
 
+<img src="media/22.jpg" width="400" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
 ---
 
 <br>
