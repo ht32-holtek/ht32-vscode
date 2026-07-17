@@ -207,6 +207,8 @@ MyProject/                 ← user-named project folder
 
 To add a second project, run **Create Project** again and select the **same parent folder** as the existing project. When prompted, select **Yes** to merge into the existing `.ht32vs` project file. Each project is fully self-contained under its own `<projectName>/` folder. Projects located in different folders cannot be merged.
 
+> **Workspace Trust** — If VS Code opens the folder in Restricted Mode, the extension will show a notification: *"This workspace is in Restricted Mode. Please trust the workspace to enable all features."* Click **Trust Workspace** to enable build and debug.
+
 ---
 
 <br>
@@ -255,6 +257,8 @@ Conversion warnings (e.g. prebuilt `.lib` files that cannot be used with GCC) ap
 
 <img src="media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
+> **Workspace Trust** — If VS Code opens the folder in Restricted Mode, the extension will show a notification: *"This workspace is in Restricted Mode. Please trust the workspace to enable all features."* Click **Trust Workspace** to enable build and debug.
+
 ---
 
 <br>
@@ -265,6 +269,8 @@ Conversion warnings (e.g. prebuilt `.lib` files that cannot be used with GCC) ap
 2. Select one or more project folders containing `.project` / `.cproject` (Eclipse CDT format) — **multiple folders can be selected at once**
 
 Each selected folder is converted into its own folder inside `HT32_VSCode/`, sharing a common `HT32_VSCode/GNU_ARM/` for startup, linker script, and generated C files. The generated folder structure and TreeView organization are identical to a uVision conversion.
+
+> **Workspace Trust** — If VS Code opens the folder in Restricted Mode, the extension will show a notification: *"This workspace is in Restricted Mode. Please trust the workspace to enable all features."* Click **Trust Workspace** to enable build and debug.
 
 ---
 

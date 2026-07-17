@@ -207,6 +207,10 @@ MyProject/                 ← 使用者命名的專案資料夾
 
 若要新增第二個專案，再次執行 **Create Project** 並選擇與現有專案**相同的上層資料夾**，在詢問時選擇 **Yes** 合併至現有的 `.ht32vs` 專案檔。每個專案完全獨立，放在各自的 `<projectName>/` 資料夾內。不同資料夾下的專案無法合併。
 
+**NOTE:**
+**工作區信任** — 若 VS Code 以受限模式開啟資料夾，擴充功能將顯示通知：*「This workspace is in Restricted Mode. Please trust the workspace to enable all features.」*，請點選 **Trust Workspace** 以啟用編譯與除錯功能。
+
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/22.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 ---
 
 <br>
@@ -255,6 +259,8 @@ MyProject/                 ← 使用者命名的專案資料夾
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/18.png" width="600" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
+> **工作區信任** — 若 VS Code 以受限模式開啟資料夾，擴充功能將顯示通知：*「This workspace is in Restricted Mode. Please trust the workspace to enable all features.」*，請點選 **Trust Workspace** 以啟用編譯與除錯功能。
+
 ---
 
 <br>
@@ -265,6 +271,8 @@ MyProject/                 ← 使用者命名的專案資料夾
 2. 選取一個或多個包含 `.project` / `.cproject` 的**專案資料夾**（**支援多選**）
 
 每個選取的資料夾各自轉換為 `HT32_VSCode/` 內的獨立目錄，共用 `HT32_VSCode/GNU_ARM/` 存放 startup、linker script 與自動產生的 C 檔案。產生的資料夾結構與 TreeView 組織方式與匯入 uVision 專案相同。
+
+> **工作區信任** — 若 VS Code 以受限模式開啟資料夾，擴充功能將顯示通知：*「This workspace is in Restricted Mode. Please trust the workspace to enable all features.」*，請點選 **Trust Workspace** 以啟用編譯與除錯功能。
 
 ---
 
