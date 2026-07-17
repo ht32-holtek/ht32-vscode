@@ -146,6 +146,7 @@ A `.ht32vs` file can list multiple sub-project folders (e.g. `Project_IAP` and `
 |--------|-----|
 | **Add Project** | Right-click the root node → **Add Project** — select from available folders in the same location |
 | **Remove&nbsp;Project** | Right-click a project node → **Remove Project** — removes it from the list (files on disk are not deleted). Not available when only one project remains. |
+| **Move Up / Move Down** | Right-click a project node → **Move Up** or **Move Down** — adjusts the sub-project's compilation order in **Build All**. |
 
 ### Renaming a project
 
@@ -275,6 +276,8 @@ Each selected folder is converted into its own folder inside `HT32_VSCode/`, sha
 - Or press **Ctrl+Shift+B** to run the default build task directly
 
 <img src="media/8.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
+For multi-project workspaces, clicking **Build**, **Debug**, **Clean**, or **Download** in the toolbar shows a QuickPick to select which sub-project to act on. **Build** and **Clean** also include a **Build All** / **Clean All** option that runs all sub-projects in sequence. The compilation order follows the project order in the Project Tree — use **Move Up / Move Down** (right-click a project node) to adjust it.
 
 <br>
 
