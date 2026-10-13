@@ -78,7 +78,7 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 
 After installation, the **HT32 icon** appears in the Activity Bar. Click it to open the HT32 panel.
 
-**When no project is open:** shows **Create / Open / Convert** buttons, plus a **Recent Projects** list below for quick access.
+**When no project is open:** shows **Create Project** and **Open Project** buttons, a **View README** link, **Convert a uVision Project** and **Convert HT32-IDE Projects** buttons, and an **Update Extension** section with **Online Update** and **Install From VSIX** shortcuts. If any projects have been opened before, a **Recent Projects** list appears below for quick access.
 
 <img src="media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
