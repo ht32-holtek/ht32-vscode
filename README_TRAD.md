@@ -591,6 +591,8 @@ int main(void) {
 | `HT32: Update Device Packs (Online)` | 從 GitHub pack 儲存庫下載並安裝缺少的 DFP packs |
 | `HT32: Install Device Pack from File` | 開啟檔案選擇器，安裝一個或多個本機 `.pack` 檔案 |
 
+> **注意：** Device Pack 的用途是讓 pyocd 認識原本不支援的 MCU 型號，只對使用 **pyocd** 的 debug 設定有效。若使用 OpenOCD，它有自己的內建腳本，安裝 Pack 不會有任何影響。
+
 ---
 
 <br>

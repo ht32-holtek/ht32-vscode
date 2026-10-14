@@ -580,6 +580,8 @@ After conversion or project creation, the extension auto-generates `.clangd` and
 | `HT32: Update Device Packs (Online)` | Download and install missing DFP packs from the GitHub pack repository |
 | `HT32: Install Device Pack from File` | Open a file picker to install one or more local `.pack` files |
 
+> **Note:** Device Packs add support for MCUs that pyocd does not recognize out of the box. This only affects **pyocd**-based debug sessions — OpenOCD uses its own built-in scripts and is not affected by pack installation.
+
 ---
 
 <br>
