@@ -109,7 +109,7 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 
 <br>
 
-**專案檔案樹**顯示原始碼群組結構，與 Keil uVision 的群組概念相同。
+**專案檔案樹**顯示原始碼群組結構，方便管理專案檔案。
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/5-1.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;"><br>
 
@@ -128,9 +128,10 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 |------|------|
 | 樹狀根節點（`.ht32vs`） | Rename Project File（重新命名）|
 | 子專案節點 | Move Up（上移）、Move Down（下移）、Open Folder in Explorer（開啟專案資料夾）、Remove Project（從清單移除）、Add Group（新增群組） |
-| 群組 | Add New Files（新建檔案）、Add Existing Files（加入現有檔案）、Remove Group（移除群組） |
-| 檔案 | File Settings（排除編譯 / Execute-only / ROM region）、Remove from Group（從群組移除）、Delete File（從磁碟刪除） |
-| Linker 檔案（`.ld`） | Remove from Group（從群組移除）、Delete File（從磁碟刪除） |
+| 群組 | Add Sub-Group（新增子群組）、Add New Files（新建檔案）、Add Existing Files（加入現有檔案）、Remove / Delete...（移除或刪除） |
+| 群組資料夾 | Add Sub-Group（新增子群組）、Remove / Delete...（移除或刪除） |
+| 檔案 | File Settings（排除編譯 / Execute-only / ROM region）、Remove / Delete...（移除或從磁碟刪除） |
+| Linker 檔案（`.ld`） | Remove / Delete...（移除或從磁碟刪除） |
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/12.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;"><br>
 ---
@@ -261,6 +262,7 @@ MyProject/                 ← 使用者命名的專案資料夾
 **`.uvprojx` 單一專案** — 共用檔輸出至 `HT32_VSCode/GNU_ARM/`；Makefile 與中繼資料輸出至 `HT32_VSCode/Project/`
 
 **`.uvmpw` 多專案** — 每個子專案各一個目錄，目錄名稱取自 `.uvprojx` 檔名（例如 `Project_IAP.uvprojx` + `Project_AP.uvprojx`）：
+
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/7.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ```
@@ -464,9 +466,9 @@ int main(void) {
 | C Runtime Library | `nano`（newlib-nano）/ `nosys`（不使用 syscalls）— 可同時勾選 |
 | printf float | 啟用浮點 printf（`-u _printf_float`） |
 | scanf float | 啟用浮點 scanf（`-u _scanf_float`） |
-| Libraries (-l) | 要連結的函式庫名稱（`-lName`） |
-| Search Paths (-L) | 函式庫搜尋路徑（`-L"dir"`） |
-| Extra LDFLAGS | 附加連結旗標 |
+| Libraries (-l) | 要連結的函式庫名稱。輸入名稱時不需加 `lib` 前綴，例如輸入 `MyDSP`，GCC 會在搜尋路徑中尋找 `libMyDSP.a`。若要直接加入預建 `.a` 檔（不透過搜尋路徑），請在工程視圖的群組上按右鍵，選擇**加入檔案至群組**。 |
+| Search Paths (-L) | GCC 搜尋函式庫的目錄（`-L"dir"`）。將含有 `.a` 檔的資料夾加入此處，再於上方 Libraries (-l) 填入對應的庫名。 |
+| Extra LDFLAGS | 直接傳給連結器的附加旗標。常見用途：`-Wl,--wrap=FunctionName`（攔截並替換特定函式）、`-Wl,--defsym=__heap_size=0x400`（覆蓋連結器符號值）。完整選項請參考 [GNU ld manual](https://sourceware.org/binutils/docs/ld/)。 |
 | Linker Scripts | 連結腳本路徑（相對於 build 目錄） |
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/15-3.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
@@ -504,12 +506,20 @@ int main(void) {
 |----------|------|
 | Output Filename | 自訂輸出檔名（留空則沿用轉換時的名稱） |
 | Post-Build | Build 後執行的命令（工作目錄：`${workspaceFolder}` = `HT32_VSCode/`） |
-| GCC Path | `arm-none-eabi-gcc` 路徑（空白 = 自動偵測或 winget 安裝） |
-| OpenOCD Path | OpenOCD 路徑（空白 = 使用內建 OpenOCD） |
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/15-4.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
-> 工具鏈路徑（GCC / OpenOCD）儲存於 VS Code 機器設定，**所有專案共用**，僅顯示於第一個專案的 Build 分頁。
+<br>
+
+### Common 區塊
+
+顯示於 Settings 面板最上方，所有專案區塊之前。設定儲存於 VS Code 機器設定（User Settings），所有專案共用。
+
+| 設定項目 | 說明 |
+|----------|------|
+| Build Before Debug (F5) | 取消勾選後，F5 直接燒錄並啟動除錯，不重新編譯（預設：勾選） |
+| GCC Path | `arm-none-eabi-gcc` 路徑（空白 = 自動偵測） |
+| OpenOCD Path | OpenOCD 路徑（空白 = 使用內建 OpenOCD） |
 
 ---
 
@@ -581,8 +591,8 @@ int main(void) {
 | `HT32: Clean` | 清除編譯輸出 |
 | `HT32: Open Settings` | 開啟專案設定 |
 | `HT32: Generate Build & Debug Config` | 重新產生 `tasks.json` 與 `launch.json` |
-| `HT32: Regenerate compile_commands.json` | 重新產生供 clangd 使用的 `compile_commands.json` |
-| `HT32: Regenerate Makefile` | 從 `project.meta.json` 重新產生 `Makefile`；用於 Makefile 遺失或格式過舊時復原 |
+| `HT32: Regenerate compile_commands.json` | 重新產生供 clangd 使用的 `compile_commands.json`；多專案工作區會顯示 QuickPick，可選擇單一專案或 **All Projects** |
+| `HT32: Regenerate Makefile` | 從 `project.meta.json` 重新產生 `Makefile`；多專案工作區會顯示 QuickPick，可選擇單一專案或 **All Projects** |
 | `HT32: Close Project` | 關閉目前載入的專案 |
 | `HT32: Clear Recent Projects` | 清除最近開啟清單 |
 | `HT32: Refresh Stack Usage` | 手動刷新 Stack Usage Analysis 面板 |
