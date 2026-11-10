@@ -521,6 +521,8 @@ int main(void) {
 | GCC Path | `arm-none-eabi-gcc` 路徑（空白 = 自動偵測） |
 | OpenOCD Path | OpenOCD 路徑（空白 = 使用內建 OpenOCD） |
 
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/15-5.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
 ---
 
 <br>

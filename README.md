@@ -513,6 +513,7 @@ Shown at the top of the Settings panel, above all project sections. Settings her
 | Build Before Debug (F5) | When unchecked, F5 flashes and starts the debugger without rebuilding (default: checked) |
 | GCC Path | `arm-none-eabi-gcc` path (blank = auto-detect) |
 | OpenOCD Path | OpenOCD path (blank = use bundled OpenOCD) |
+<img src="media/15-5.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
