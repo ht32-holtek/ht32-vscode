@@ -8,6 +8,23 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 
 <br>
 
+## 功能簡介
+
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/overview.jpg" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
+| # | 區域 | 說明 |
+|---|------|------|
+| **1** | HT32 Activity Bar 圖示 | 點擊開啟 HT32 面板 |
+| **2** | Project File Tree | 原始碼群組——右鍵可新增/移除檔案與群組 |
+| **3** | 工具列 | 快速操作按鈕：**Build**、**Clean**、**Download**、**Debug**、**Settings** 等 |
+| **4** | 編輯器 | 主程式碼編輯區——顯示任何開啟中的原始檔 |
+| **5** | Configuration Wizard 控制項 | 開啟含有 Configuration Wizard 語法的檔案時出現於右上角——**預覽圖示**可直接開啟視覺化精靈；**Text Editor ▼** 下拉選單可切換文字編輯器與精靈視圖 |
+| **6** | 底部面板 | **Problems**——編譯錯誤與警告<br>**Output**（選擇 *HT32 VSCode*）——擴充功能與 pyOCD 連線 log<br>**Debug Console**——除錯輸出<br>**Terminal**——Make 編譯的原始輸出 |
+
+---
+
+<br>
+
 ## 功能特色
 
 | 功能 | 說明 |
@@ -38,7 +55,9 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 > **OpenOCD**：已內建<br>
 > **pyOCD**：首次使用時自動安裝<br>
 > **GCC 工具鏈**：擴充功能啟動時自動偵測；找不到時透過 winget 自動安裝（**需 GCC 8 以上**）<br>
-> **相依擴充功能**：安裝時自動一併安裝 **Cortex-Debug**（除錯介面）與 **Holtek HT32 Configuration Wizard**（[設定精靈](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode)）
+> **相依擴充功能**：安裝時自動一併安裝 **Cortex-Debug**（除錯介面）與 **Holtek HT32 Configuration Wizard**（[設定精靈](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode)）。
+
+> 💡 **提示：** 當 VS Code 彈出通知詢問是否安裝缺少的元件（擴充功能、GCC 工具鏈、pyOCD），請點選 **Install**。
 
 ---
 
@@ -205,6 +224,8 @@ MyProject/
 | ② | 選擇 **MCU 型號** |
 | ③ | 選擇輸出類型：**Executable (.elf)** 或 **Library (.a)** |
 | ④ | 輸入**專案名稱**和儲存位置 |
+
+> **Library (.a)：** 產生靜態函式庫而非可執行檔。建立後只有一個空的 `.c` 檔作為起點——加入你的原始碼並實作函式庫內容即可。
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 

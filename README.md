@@ -8,6 +8,23 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 
 <br>
 
+## Quick Overview
+
+<img src="media/overview.jpg" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
+| # | Area | Description |
+|---|------|-------------|
+| **1** | HT32 Activity Bar icon | Click to open the HT32 panel |
+| **2** | Project File Tree | Source groups — add/remove files and groups via right-click |
+| **3** | Toolbar | Quick-access buttons: **Build**, **Clean**, **Download**, **Debug**, **Settings**, and more |
+| **4** | Editor | Main code editor — displays any open source file |
+| **5** | Configuration Wizard controls | Visible in the top-right when a file containing Configuration Wizard syntax is open — the **preview icon** opens the visual wizard directly; the **Text Editor ▼** dropdown switches between text editor and wizard view |
+| **6** | Bottom panels | **Problems** — build errors and warnings<br>**Output** (select *HT32 VSCode*) — extension and pyOCD logs<br>**Debug Console** — debug session output<br>**Terminal** — raw build output from Make |
+
+---
+
+<br>
+
 ## Features
 
 | Feature | Description |
@@ -39,6 +56,8 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 > **pyOCD:** Installed automatically on first use — no manual setup required. Python is not required.<br>
 > **GCC toolchain:** Auto-detected on startup; installed automatically via winget if not found, or set manually in settings. **GCC 8 or later is required.**<br>
 > **Extension dependencies:** [Cortex-Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and [Holtek Configuration Wizard](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode) are installed automatically.
+
+> 💡 **Tip:** When VS Code shows a notification asking to install missing components (extensions, GCC toolchain, pyOCD), click **Install**.
 
 ---
 
@@ -205,6 +224,8 @@ MyProject/
 | ② | Select the **MCU model** |
 | ③ | Select output type: **Executable (.elf)** or **Library (.a)** |
 | ④ | Enter the **project name** and output folder |
+
+> **Library (.a):** Produces a static library archive instead of an executable. The project starts with a single empty `.c` file — add your source files and implement your library functions.
 
 <img src="media/6.jpg" width="450" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
