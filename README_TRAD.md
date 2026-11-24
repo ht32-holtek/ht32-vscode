@@ -1,4 +1,4 @@
-﻿[English](https://ht32-holtek.github.io/ht32-vscode/) | [中文使用手冊](https://ht32-holtek.github.io/ht32-vscode/README_TRAD)
+﻿[English](https://ht32-holtek.github.io/ht32-vscode/) | [繁體中文](https://ht32-holtek.github.io/ht32-vscode/README_TRAD) | [简体中文](https://ht32-holtek.github.io/ht32-vscode/README_SIMP)
 
 # Holtek HT32 VS Code Extension
 
@@ -14,12 +14,12 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 
 | # | 區域 | 說明 |
 |---|------|------|
-| **1** | HT32 Activity Bar 圖示 | 點擊開啟 HT32 面板 |
-| **2** | Project File Tree | 原始碼群組——右鍵可新增/移除檔案與群組 |
-| **3** | 工具列 | 快速操作按鈕：**Build**、**Clean**、**Download**、**Debug**、**Settings** 等 |
-| **4** | 編輯器 | 主程式碼編輯區——顯示任何開啟中的原始檔 |
-| **5** | Configuration Wizard 控制項 | 開啟含有 Configuration Wizard 語法的檔案時出現於右上角——**預覽圖示**可直接開啟視覺化精靈；**Text Editor ▼** 下拉選單可切換文字編輯器與精靈視圖 |
-| **6** | 底部面板 | **Problems**——編譯錯誤與警告<br>**Output**（選擇 *HT32 VSCode*）——擴充功能與 pyOCD 連線 log<br>**Debug Console**——除錯輸出<br>**Terminal**——Make 編譯的原始輸出 |
+| **1** | HT32 活動列圖示 | 點擊開啟 HT32 面板 |
+| **2** | 專案檔案樹 | 原始碼群組：右鍵可新增/移除檔案與群組 |
+| **3** | 工具列 | 快速操作按鈕：**Build**、**Clean**、**Download**、**Debug**、**Settings** 等<br>工具列最右側的 **`···`（更多動作）** 按鈕內含 **Open Project**、**Close Project** 與 **Create Project** |
+| **4** | 編輯器 | 主程式碼編輯區：顯示任何開啟中的原始檔 |
+| **5** | Configuration Wizard 控制項 | 開啟含有 Configuration Wizard 語法的檔案時出現於右上角<br>**預覽圖示**：可直接開啟視覺化精靈<br>**Text Editor ▼** 下拉選單：可切換文字編輯器與精靈視圖 |
+| **6** | 底部面板 | **Problems**：編譯錯誤與警告<br>**Output**：擴充功能與除錯器 log<br>**Debug Console**：除錯輸出<br>**Terminal**：Make 編譯的原始輸出 |
 
 ---
 
@@ -49,6 +49,7 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 | 項目 | 說明 |
 |------|------|
 | 作業系統 | Windows x64 |
+| VS Code | 1.106.3 以上 |
 | 除錯器 | Holtek e-Link32 Pro / Lite；支援 J-Link、ST-Link |
 | FWLib | 需要 |
 
@@ -57,7 +58,9 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 > **GCC 工具鏈**：擴充功能啟動時自動偵測；找不到時透過 winget 自動安裝（**需 GCC 8 以上**）<br>
 > **相依擴充功能**：安裝時自動一併安裝 **Cortex-Debug**（除錯介面）與 **Holtek HT32 Configuration Wizard**（[設定精靈](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode)）。
 
-> 💡 **提示：** 當 VS Code 彈出通知詢問是否安裝缺少的元件（擴充功能、GCC 工具鏈、pyOCD），請點選 **Install**。
+> 💡 **提示：** 當 VS Code 在**右下角**彈出通知詢問是否安裝缺少的元件（擴充功能、GCC 工具鏈、pyOCD），請點選 **Install**。
+
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/install_tip.jpg" width="400" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -113,6 +116,7 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 | Debug | 透過 pyOCD 或 OpenOCD 啟動 Cortex-Debug 除錯（Flash & Debug 或 Attach 模式） |
 | Clean | 刪除 `build/` 輸出目錄 |
 | Download | 燒錄韌體（不啟動除錯） |
+| Erase Flash | 清除整顆晶片的 Flash（chip erase） |
 | Settings | 開啟專案設定 |
 | Generate Build & Debug Config | 重新產生 `tasks.json` 與 `launch.json` |
 
@@ -123,6 +127,8 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 | Create Project | 開啟建立專案精靈 |
 | Open Project | 開啟 `.ht32vs` 專案檔 |
 | Close Project | 關閉目前載入的專案 |
+
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/more_actions.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -147,8 +153,8 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 |------|------|
 | 樹狀根節點（`.ht32vs`） | Rename Project File（重新命名）|
 | 子專案節點 | Move Up（上移）、Move Down（下移）、Open Folder in Explorer（開啟專案資料夾）、Remove Project（從清單移除）、Add Group（新增群組） |
-| 群組 | Add Sub-Group（新增子群組）、Add New Files（新建檔案）、Add Existing Files（加入現有檔案）、Remove / Delete...（移除或刪除） |
-| 群組資料夾 | Add Sub-Group（新增子群組）、Remove / Delete...（移除或刪除） |
+| 群組 | Add New Files（新建檔案）、Add Existing Files（加入現有檔案）、Add Group（在此群組下新增子群組）、Remove / Delete...（移除或刪除） |
+| 群組資料夾 | Add New Files（新建檔案）、Add Existing Files（加入現有檔案）、Add Group（在此群組下新增子群組）、Remove / Delete...（移除或刪除） |
 | 檔案 | File Settings（排除編譯 / Execute-only / ROM region）、Remove / Delete...（移除或從磁碟刪除） |
 | Linker 檔案（`.ld`） | Remove / Delete...（移除或從磁碟刪除） |
 
@@ -383,6 +389,13 @@ MyProject/                 ← 使用者命名的專案資料夾
 2. 點擊工具列的 **Download**，或按 **Ctrl+Alt+D**
 3. 韌體自動燒錄，終端機顯示進度
 
+### 清除 Flash（Erase Flash）
+
+清除整顆晶片的 Flash，不燒錄新韌體。適用於現有韌體損壞或需要完全清除的情況。
+
+1. 確認除錯器已連接
+2. 點擊工具列的 **Erase Flash**
+
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ### 除錯（Debug）
@@ -408,6 +421,107 @@ MyProject/                 ← 使用者命名的專案資料夾
 | HT32 OpenOCD Attach | 不燒錄，直接附接到執行中的目標 |
 
 <img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
+---
+
+<br>
+
+## Cortex-Debug 操作說明
+
+Cortex-Debug 是本擴充功能的除錯介面，負責提供中斷點管理、變數觀察、記憶體視窗與周邊暫存器查看等功能。
+
+### 除錯工具列
+
+除錯啟動後，畫面上方出現浮動工具列：
+
+| 按鈕 | 快捷鍵 | 說明 |
+|------|--------|------|
+| Continue / Pause（繼續／暫停） | F5 | 程式暫停時顯示 Continue（繼續執行至下一中斷點）；執行中時顯示 Pause（手動暫停），**同一按鈕切換** |
+| Step Over（不進入） | F10 | 執行下一行，不進入呼叫的函式內部 |
+| Step Into（進入） | F11 | 進入下一個函式內部 |
+| Step Out（跳出） | Shift+F11 | 跳出目前函式，返回呼叫端 |
+| Restart（重新開始） | — | 重新燒錄並從頭開始除錯 |
+| Stop（停止） | Shift+F5 | 停止除錯工作階段 |
+
+---
+
+### 中斷點（Breakpoints）
+
+- 在程式碼行號左側**點一下**，出現紅點即為設定中斷點；再點一下取消
+- **條件中斷點**：在紅點上按右鍵 → **Edit Breakpoint**，可輸入觸發條件（例如 `i == 10`）
+
+---
+
+### 變數觀察（Watch）
+
+左側**執行和除錯**面板的 **WATCH** 區塊可監視任意運算式：
+
+1. 點擊「**＋**」
+2. 輸入變數名稱或 C 運算式（例如 `myVar`、`buf[0]`、`*(uint32_t*)0x20000000`）
+3. 每次除錯器暫停時自動更新數值
+
+---
+
+### 記憶體視窗（Memory View）
+
+在 **MEMORY** 面板點擊「**＋**」新增記憶體視窗，需依序完成**兩步輸入**：
+
+| 步驟 | 彈出視窗說明 | 輸入內容 | 範例 |
+|------|------------|---------|------|
+| ① | 起始位址（Enter address to watch） | 要監視的記憶體起始位址（hex） | `0x20000000` |
+| ② | 顯示長度（Enter a hex/dec constant or a C-expression for size） | 要顯示的 byte 數量 | `256`、`0x100`、`sizeof(myBuf)` |
+
+> **注意：** 第二個彈出視窗詢問的是**顯示長度**（要顯示幾個 byte），並非第二個位址。  
+> 長度可輸入十進位（`256`）、十六進位（`0x100`），或 C 運算式（`sizeof(myBuf)`、`MY_BUF_SIZE`）——Cortex-Debug 會透過除錯器求值後決定顯示範圍。
+
+**切換顯示格式：** Memory View 上方工具列可切換資料寬度
+
+| 按鈕 | 格式 | 說明 |
+|------|------|------|
+| `1` | Byte | 每格 8-bit |
+| `2` | HWord | 每格 16-bit |
+| `4` | Word | 每格 32-bit |
+| `8` | DWord | 每格 64-bit |
+
+**刪除記憶體視窗：** 點擊 Memory View 標題旁的 **×** 即可移除。
+
+---
+
+### 周邊暫存器（Peripherals）
+
+左側面板的 **PERIPHERALS** 依據 SVD 檔列出所有 MCU 周邊暫存器，展開任一 IP 節點即可即時讀取其暫存器值。
+
+#### IP Clock 尚未開啟時的讀取失敗
+
+展開某個 IP 時，Cortex-Debug 會立即嘗試讀取該 IP 的所有暫存器。若韌體尚未對該 IP 開啟時鐘，硬體會拒絕存取，Output 面板將出現：
+
+```
+Error: Failed to read memory at 0x4xxxxxxx
+```
+
+**原因：** HT32 的每個 IP 都有獨立的 APB/AHB 時鐘閘控，未開啟時對應的記憶體映射暫存器無法讀取。
+
+**解決方式：**
+
+| 情況 | 做法 |
+|------|------|
+| 程式還沒執行到時鐘初始化 | 先讓程式跑過 `RCU_APBxPeripClockConfig(RCU_APBx_Periph_XXX, ENABLE)` 再展開 |
+| 不需要查看這個 IP | 將節點**收合**，避免錯誤訊息持續出現 |
+| 想在一開始就能看到 | 在 `main()` 最前面加入對應 IP 的時鐘開啟，或在時鐘初始化處設中斷點，停下後再展開 |
+
+> 這是正常的硬體行為，不是除錯器或擴充功能的問題。
+
+---
+
+### 呼叫堆疊（Call Stack）
+
+左側面板的 **CALL STACK** 顯示目前的函式呼叫鏈，點擊任一層可在編輯器跳至對應位置並查看該層的區域變數。
+
+---
+
+### 反組譯（Disassembly）
+
+在程式碼編輯區按右鍵 → **Open Disassembly View**，可查看對應的組合語言指令，配合 Step Into 使用可追蹤至指令層級。
 
 ---
 
@@ -610,6 +724,7 @@ int main(void) {
 | `HT32: Convert HT32-IDE Projects` | 匯入 Eclipse CDT `.project` |
 | `HT32: Build` | 執行建置任務 |
 | `HT32: Download` | 燒錄韌體 |
+| `HT32: Erase Flash` | 清除整顆晶片的 Flash（chip erase） |
 | `HT32: Debug` | 啟動除錯工作階段 |
 | `HT32: Clean` | 清除編譯輸出 |
 | `HT32: Open Settings` | 開啟專案設定 |

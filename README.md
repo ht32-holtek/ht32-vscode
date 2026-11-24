@@ -15,11 +15,11 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 | # | Area | Description |
 |---|------|-------------|
 | **1** | HT32 Activity Bar icon | Click to open the HT32 panel |
-| **2** | Project File Tree | Source groups — add/remove files and groups via right-click |
-| **3** | Toolbar | Quick-access buttons: **Build**, **Clean**, **Download**, **Debug**, **Settings**, and more |
-| **4** | Editor | Main code editor — displays any open source file |
-| **5** | Configuration Wizard controls | Visible in the top-right when a file containing Configuration Wizard syntax is open — the **preview icon** opens the visual wizard directly; the **Text Editor ▼** dropdown switches between text editor and wizard view |
-| **6** | Bottom panels | **Problems** — build errors and warnings<br>**Output** (select *HT32 VSCode*) — extension and pyOCD logs<br>**Debug Console** — debug session output<br>**Terminal** — raw build output from Make |
+| **2** | Project File Tree | Source groups: add/remove files and groups via right-click |
+| **3** | Toolbar | Quick-access buttons: **Build**, **Clean**, **Download**, **Debug**, **Settings**, and more<br>The **`···` (More Actions)** button at the right end of the toolbar also contains **Open Project**, **Close Project**, and **Create Project** |
+| **4** | Editor | Main code editor: displays any open source file |
+| **5** | Configuration Wizard controls | Visible in the top-right when a file containing Configuration Wizard syntax is open<br>**Preview icon**: opens the visual wizard directly<br>**Text Editor ▼** dropdown: switches between text editor and wizard view |
+| **6** | Bottom panels | **Problems**: build errors and warnings<br>**Output**: extension and debugger logs<br>**Debug Console**: debug session output<br>**Terminal**: raw build output from Make |
 
 ---
 
@@ -49,6 +49,7 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 | Item | Description |
 |------|-------------|
 | **OS** | Windows x64 |
+| **VS Code** | 1.106.3 or later |
 | **Debug probe** | Holtek e-Link32 Pro or e-Link32 Lite; J-Link and ST-Link also supported |
 | **FWLib** | Required |
 
@@ -57,7 +58,9 @@ A VS Code extension for **Holtek HT32** series Cortex-M microcontrollers (M0+/M3
 > **GCC toolchain:** Auto-detected on startup; installed automatically via winget if not found, or set manually in settings. **GCC 8 or later is required.**<br>
 > **Extension dependencies:** [Cortex-Debug](https://marketplace.visualstudio.com/items?itemName=marus25.cortex-debug) and [Holtek Configuration Wizard](https://marketplace.visualstudio.com/items?itemName=holtek.ht32-config-vscode) are installed automatically.
 
-> 💡 **Tip:** When VS Code shows a notification asking to install missing components (extensions, GCC toolchain, pyOCD), click **Install**.
+> 💡 **Tip:** When VS Code shows a notification in the **bottom-right corner** asking to install missing components (extensions, GCC toolchain, pyOCD), click **Install**.
+
+<img src="media/install_tip.jpg" width="400" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -113,6 +116,7 @@ After installation, the **HT32 icon** appears in the Activity Bar. Click it to o
 | Debug | Start Cortex-Debug session via pyOCD or OpenOCD (Flash & Debug or Attach) |
 | Clean | Delete the `build/` output directory |
 | Download | Download firmware without starting a debug session |
+| Erase Flash | Erase the entire chip flash (chip erase) |
 | Settings | Open Project Settings |
 | Generate Build & Debug Config | Regenerate `tasks.json` and `launch.json` |
 
@@ -123,6 +127,8 @@ The **`···` (More Actions)** menu also contains:
 | Create Project | Open the Create Project wizard |
 | Open Project | Open a `.ht32vs` project file |
 | Close Project | Close the currently loaded project |
+
+<img src="media/more_actions.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -147,8 +153,8 @@ Hovering over the root node reveals:
 |--------|---------|
 | Tree root (`.ht32vs`) | Rename Project File |
 | Sub-project node | Move Up, Move Down, Open Folder in Explorer, Remove Project, Add Group |
-| Group | Add Sub-Group, Add New Files, Add Existing Files, Remove / Delete... |
-| Group folder | Add Sub-Group, Remove / Delete... |
+| Group | Add New Files, Add Existing Files, Add Group (adds a sub-group under this group), Remove / Delete... |
+| Group folder | Add New Files, Add Existing Files, Add Group (adds a sub-group under this group), Remove / Delete... |
 | File | File Settings (exclude / execute-only / ROM region), Remove / Delete... |
 | Linker file (`.ld`) | Remove / Delete... |
 
@@ -381,6 +387,13 @@ For all related settings, see [Project Settings → Debugger tab](#debugger-tab)
 
 <img src="media/10.jpg" width="500" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
+### Erase Flash
+
+Erases the entire chip flash without programming new firmware. Useful when the existing firmware is corrupted or you need a clean slate.
+
+1. Confirm the debug probe is connected
+2. Click **Erase Flash** in the HT32 toolbar
+
 ### Debug
 
 1. Click **Debug** in the HT32 toolbar, or press **Ctrl+Shift+D**
@@ -403,6 +416,107 @@ Use this when the target board is already running and you don't need to reflash.
 | HT32 OpenOCD Attach | Connect to running target without flashing |
 
 <img src="media/11.jpg" width="700" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+
+---
+
+<br>
+
+## Cortex-Debug Operation Guide
+
+Cortex-Debug is the debug interface used by this extension. It provides breakpoint management, variable watching, memory inspection, and peripheral register viewing.
+
+### Debug Toolbar
+
+A floating toolbar appears at the top of the screen when a debug session is active:
+
+| Button | Shortcut | Description |
+|--------|----------|-------------|
+| Continue / Pause | F5 | When paused: Continue execution to the next breakpoint. When running: Pause execution. **Same button, toggles state** |
+| Step Over | F10 | Execute the next line without entering called functions |
+| Step Into | F11 | Step into the next function call |
+| Step Out | Shift+F11 | Step out of the current function and return to the caller |
+| Restart | — | Re-flash and restart the debug session from the beginning |
+| Stop | Shift+F5 | Terminate the debug session |
+
+---
+
+### Breakpoints
+
+- **Click** on the left of a line number to set a breakpoint (red dot); click again to remove it
+- **Conditional breakpoint**: Right-click the red dot → **Edit Breakpoint** to enter a trigger condition (e.g. `i == 10`)
+
+---
+
+### Watch
+
+The **WATCH** section in the Run & Debug panel lets you monitor any expression:
+
+1. Click **＋**
+2. Enter a variable name or C expression (e.g. `myVar`, `buf[0]`, `*(uint32_t*)0x20000000`)
+3. Values update automatically each time the debugger halts
+
+---
+
+### Memory View
+
+Click **＋** in the **MEMORY** panel to add a memory window. Two prompts appear in sequence:
+
+| Step | Prompt | Input | Example |
+|------|--------|-------|---------|
+| ① | Enter address to watch | Start address (hex) | `0x20000000` |
+| ② | Enter a hex/dec constant or a C-expression for size | Number of bytes to display | `256`, `0x100`, `sizeof(myBuf)` |
+
+> **Note:** The second prompt asks for the **display length** (how many bytes to show), not a second address.  
+> You can enter a decimal (`256`), hex (`0x100`), or a C-expression (`sizeof(myBuf)`, `MY_BUF_SIZE`) — Cortex-Debug evaluates the expression via the debugger to determine the display range.
+
+**Switch display format:** Use the toolbar above the Memory View to change data width:
+
+| Button | Format | Description |
+|--------|--------|-------------|
+| `1` | Byte | 8-bit per cell |
+| `2` | HWord | 16-bit per cell |
+| `4` | Word | 32-bit per cell |
+| `8` | DWord | 64-bit per cell |
+
+**Remove a memory window:** Click the **×** next to the Memory View title.
+
+---
+
+### Peripherals
+
+The **PERIPHERALS** panel lists all MCU peripheral registers based on the SVD file. Expand any IP node to read its register values in real time.
+
+#### Read failure when IP clock is not yet enabled
+
+When you expand an IP node, Cortex-Debug immediately tries to read all of its registers. If the firmware has not yet enabled the clock for that IP, the hardware denies the access and the Output panel shows:
+
+```
+Error: Failed to read memory at 0x4xxxxxxx
+```
+
+**Cause:** Every HT32 IP has an independent APB/AHB clock gate. While the clock is off, the memory-mapped registers of that IP cannot be read.
+
+**How to handle it:**
+
+| Situation | Action |
+|-----------|--------|
+| Firmware has not yet reached clock initialization | Let execution pass `RCU_APBxPeripClockConfig(RCU_APBx_Periph_XXX, ENABLE)` before expanding the node |
+| You don't need to inspect this IP | **Collapse** the node to stop the repeated error messages |
+| You want to inspect the IP from the start | Enable the IP clock at the top of `main()`, or set a breakpoint at the clock init call and expand the node after halting there |
+
+> This is normal hardware behavior — it is not a bug in the debugger or the extension.
+
+---
+
+### Call Stack
+
+The **CALL STACK** panel shows the current function call chain. Click any frame to jump to that location in the editor and inspect its local variables.
+
+---
+
+### Disassembly
+
+Right-click in the code editor → **Open Disassembly View** to see the corresponding assembly instructions. Useful when stepping at the instruction level with Step Into.
 
 ---
 
@@ -598,6 +712,7 @@ After conversion or project creation, the extension auto-generates `.clangd` and
 | `HT32: Convert HT32-IDE Projects` | Import Eclipse CDT `.project` |
 | `HT32: Build` | Run build task |
 | `HT32: Download` | Download firmware |
+| `HT32: Erase Flash` | Erase the entire chip flash (chip erase) |
 | `HT32: Debug` | Start debug session |
 | `HT32: Clean` | Clean build output |
 | `HT32: Open Settings` | Open Project Settings |
