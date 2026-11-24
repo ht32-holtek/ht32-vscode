@@ -102,7 +102,7 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）專用 VS Code 擴充功�
 
 **專案未開啟時**，主畫面依序顯示建立與開啟專案的按鈕、查看說明文件的連結、轉換 uVision 與 HT32-IDE 專案的按鈕，以及線上更新擴充功能、從 VSIX 安裝、線上更新 Device Packs 與從檔案安裝 Pack 的快速入口。若曾開啟過專案，下方會列出最近開啟清單，點擊即可直接開啟。
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/4-t.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 

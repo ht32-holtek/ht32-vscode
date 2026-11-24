@@ -60,7 +60,7 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）专用 VS Code 扩展。�
 
 > 💡 **提示：** 当 VS Code 在**右下角**弹出通知询问是否安装缺少的组件（扩展、GCC 工具链、pyOCD），请点选 **Install**。
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/install_tip.jpg" width="400" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/install_tip.jpg" width="800" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
@@ -102,7 +102,7 @@ Holtek HT32 系列 Cortex-M 微控制器（M0+/M3/M4）专用 VS Code 扩展。�
 
 **项目未打开时**，主画面依次显示创建与打开项目的按钮、查看说明文档的链接、转换 uVision 与 HT32-IDE 项目的按钮，以及在线更新扩展、从 VSIX 安装、在线更新 Device Packs 与从文件安装 Pack 的快速入口。若曾打开过项目，下方会列出最近打开列表，点击即可直接打开。
 
-<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/4.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
+<img src="https://raw.githubusercontent.com/ht32-holtek/ht32-vscode/main/media/4-s.jpg" width="300" style="border:1px solid #ccc; border-radius:4px; padding:3px;">
 
 ---
 
